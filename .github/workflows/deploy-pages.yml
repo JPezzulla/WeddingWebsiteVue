@@ -4,8 +4,9 @@ on:
   push:
     branches: [ main ]
 
+# Allow the job to push built files back to the repo
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -15,6 +16,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # ensure the default GITHUB_TOKEN credentials are available for subsequent steps that need to push
+          persist-credentials: true
 
       - name: Use Node.js
         uses: actions/setup-node@v4

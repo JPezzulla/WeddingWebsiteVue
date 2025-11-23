@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-const CORRECT_PASSWORD = 'BohMoYaKnow'
+const CORRECT_PASSWORD = 'SaturdaysInLincolnPark'
 const AUTH_COOKIE_NAME = 'wedding_auth'
 const COOKIE_EXPIRY_DAYS = 30
 
