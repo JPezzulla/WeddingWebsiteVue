@@ -1,20 +1,15 @@
-import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import vueDevTools from 'vite-plugin-vue-devtools'
 
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-    vueDevTools(),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    },
-  },
+/**
+ * Vite config that honors a build-time BASE_URL environment variable.
+ * The workflow sets BASE_URL='/' so the site is root-relative for your custom domain.
+ * Locally, to test a GitHub project page build, set BASE_URL='/WeddingWebsiteVue/'.
+ */
+export default defineConfig(() => {
+  const base = process.env.BASE_URL || '/'
+  return {
+    base,
+    plugins: [vue()],
+  }
 })
