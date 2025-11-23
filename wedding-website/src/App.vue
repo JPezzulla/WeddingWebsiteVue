@@ -1,59 +1,52 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
+import SnakeGame from './components/SnakeGame.vue'
+import PasswordGate from './components/PasswordGate.vue'
+import { useKonamiCode } from './composables/useKonamiCode'
+import { useAuth } from './composables/useAuth'
+
+const showSnakeGame = ref(false)
+const { isAuthenticated, checkAuth } = useAuth()
+
+// Check authentication on app mount
+onMounted(() => {
+  checkAuth()
+})
+
+useKonamiCode(() => {
+  showSnakeGame.value = true
+})
+
+const closeSnakeGame = () => {
+  showSnakeGame.value = false
+}
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <Header />
-    </div>
-  </header>
-  <main>
-  <RouterView />
-</main>
+  <!-- Show password gate if not authenticated -->
+  <PasswordGate v-if="!isAuthenticated" />
+
+  <!-- Show main site if authenticated -->
+  <template v-else>
+    <Header />
+    <main class="main-content">
+      <RouterView />
+    </main>
+    <Footer />
+
+    <!-- Konami Code Easter Egg -->
+    <Teleport to="body">
+      <SnakeGame v-if="showSnakeGame" @close="closeSnakeGame" />
+    </Teleport>
+  </template>
 </template>
 
 <style scoped>
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.main-content {
+  /* Add padding-top to account for fixed header */
+  padding-top: 90px;
+  min-height: calc(100vh - 200px);
 }
 </style>

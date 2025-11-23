@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Tuxedo Cat Icon -->
+
+  <!-- Left Ear -->
+  <path d="M 18 12 L 12 2 L 8 8 L 14 18 Z" fill="#2d2d2d"/>
+
+  <!-- Right Ear -->
+  <path d="M 46 12 L 52 2 L 56 8 L 50 18 Z" fill="#2d2d2d"/>
+
+  <!-- Head (black) -->
+  <circle cx="32" cy="28" r="16" fill="#2d2d2d"/>
+
+  <!-- White chest/face marking -->
+  <ellipse cx="32" cy="28" rx="10" ry="14" fill="#ffffff"/>
+
+  <!-- Black forehead -->
+  <ellipse cx="32" cy="20" rx="12" ry="8" fill="#2d2d2d"/>
+
+  <!-- Left Eye -->
+  <ellipse cx="26" cy="26" rx="3" ry="4" fill="#8a9a7b"/>
+  <ellipse cx="26.5" cy="25" rx="1.5" ry="2" fill="#2d2d2d"/>
+  <circle cx="26.8" cy="24.5" r="0.8" fill="#ffffff"/>
+
+  <!-- Right Eye -->
+  <ellipse cx="38" cy="26" rx="3" ry="4" fill="#8a9a7b"/>
+  <ellipse cx="38.5" cy="25" rx="1.5" ry="2" fill="#2d2d2d"/>
+  <circle cx="38.8" cy="24.5" r="0.8" fill="#ffffff"/>
+
+  <!-- Nose -->
+  <ellipse cx="32" cy="32" rx="2" ry="1.5" fill="#d4a5a5"/>
+
+  <!-- Mouth -->
+  <path d="M 32 33 Q 28 35 26 34" stroke="#2d2d2d" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <path d="M 32 33 Q 36 35 38 34" stroke="#2d2d2d" stroke-width="1" fill="none" stroke-linecap="round"/>
+
+  <!-- Whiskers -->
+  <line x1="16" y1="28" x2="8" y2="26" stroke="#2d2d2d" stroke-width="0.5"/>
+  <line x1="16" y1="30" x2="8" y2="31" stroke="#2d2d2d" stroke-width="0.5"/>
+  <line x1="48" y1="28" x2="56" y2="26" stroke="#2d2d2d" stroke-width="0.5"/>
+  <line x1="48" y1="30" x2="56" y2="31" stroke="#2d2d2d" stroke-width="0.5"/>
+
+  <!-- Body (black) -->
+  <ellipse cx="32" cy="48" rx="14" ry="12" fill="#2d2d2d"/>
+
+  <!-- White tuxedo chest -->
+  <ellipse cx="32" cy="48" rx="6" ry="10" fill="#ffffff"/>
+
+  <!-- Little bow tie -->
+  <path d="M 32 42 L 28 44 L 32 45 L 36 44 Z" fill="#c9a961"/>
+  <circle cx="32" cy="44" r="1" fill="#c9a961"/>
+</svg>

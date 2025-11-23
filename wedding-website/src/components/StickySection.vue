@@ -1,0 +1,213 @@
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+
+interface Props {
+  imageSrc: string
+  imageAlt?: string
+  reverse?: boolean
+  backgroundColor?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  imageAlt: 'Wedding photo',
+  reverse: false,
+  backgroundColor: 'var(--cream)',
+})
+
+const sectionRef = ref<HTMLElement | null>(null)
+const imageContainerRef = ref<HTMLElement | null>(null)
+const imageRef = ref<HTMLElement | null>(null)
+const isMobile = ref(false)
+
+const checkMobile = () => {
+  isMobile.value = window.innerWidth <= 1024
+}
+
+onMounted(() => {
+  checkMobile()
+
+  const handleScroll = () => {
+    // Skip sticky behavior on mobile
+    if (isMobile.value || !sectionRef.value || !imageRef.value || !imageContainerRef.value) return
+
+    const sectionRect = sectionRef.value.getBoundingClientRect()
+    const containerRect = imageContainerRef.value.getBoundingClientRect()
+    const imageWidth = imageRef.value.offsetWidth
+    const windowHeight = window.innerHeight
+
+    // Calculate centered position
+    const centeredLeft = (containerRect.width - imageWidth) / 2
+
+    // Calculate if section is in view
+    const sectionTop = sectionRect.top
+    const sectionBottom = sectionRect.bottom
+
+    // Image becomes sticky when section enters viewport
+    if (sectionTop <= 0 && sectionBottom > windowHeight) {
+      imageRef.value.style.position = 'fixed'
+      imageRef.value.style.top = '50%'
+      imageRef.value.style.transform = 'translateY(-50%)'
+      imageRef.value.style.left = `${containerRect.left + centeredLeft}px`
+      imageRef.value.style.width = 'auto'
+    } else if (sectionTop > 0) {
+      // Before section reaches top
+      imageRef.value.style.position = 'absolute'
+      imageRef.value.style.top = '0'
+      imageRef.value.style.left = `${centeredLeft}px`
+      imageRef.value.style.width = 'auto'
+      imageRef.value.style.transform = 'none'
+    } else if (sectionBottom <= windowHeight) {
+      // After section passes bottom
+      imageRef.value.style.position = 'absolute'
+      imageRef.value.style.top = 'auto'
+      imageRef.value.style.bottom = '0'
+      imageRef.value.style.left = `${centeredLeft}px`
+      imageRef.value.style.width = 'auto'
+      imageRef.value.style.transform = 'none'
+    }
+  }
+
+  const handleResize = () => {
+    checkMobile()
+    handleScroll()
+  }
+
+  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('resize', handleResize)
+  handleScroll() // Initial check
+
+  onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll)
+    window.removeEventListener('resize', handleResize)
+  })
+})
+</script>
+
+<template>
+  <section
+    ref="sectionRef"
+    class="sticky-section"
+    :class="{ reverse }"
+    :style="{ backgroundColor }"
+  >
+    <div ref="imageContainerRef" class="image-container">
+      <div ref="imageRef" class="sticky-image">
+        <img :src="imageSrc" :alt="imageAlt" />
+      </div>
+    </div>
+    <div class="content-container">
+      <div class="content">
+        <slot />
+      </div>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.sticky-section {
+  position: relative;
+  min-height: 200vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 8rem 4rem;
+}
+
+.sticky-section.reverse {
+  direction: rtl;
+}
+
+.sticky-section.reverse .content-container {
+  direction: ltr;
+}
+
+.image-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sticky-image {
+  position: absolute;
+  height: 70vh;
+  max-height: 700px;
+  width: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.sticky-image img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 0;
+}
+
+.content {
+  max-width: 600px;
+}
+
+/* Mobile responsive */
+@media (max-width: 1024px) {
+  .sticky-section {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 3rem 1.5rem;
+    gap: 2rem;
+  }
+
+  .sticky-section.reverse {
+    direction: ltr;
+  }
+
+  .image-container {
+    display: block;
+  }
+
+  .sticky-image {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 500px;
+    margin-bottom: 0;
+  }
+
+  .sticky-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .content-container {
+    padding: 0;
+  }
+
+  .content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .sticky-section {
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+  }
+
+  .sticky-image {
+    max-height: 400px;
+  }
+}
+</style>

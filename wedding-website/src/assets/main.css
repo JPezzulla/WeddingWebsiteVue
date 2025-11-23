@@ -1,45 +1,204 @@
 @import './base.css';
 
+/* Art Nouveau Wedding Theme - Cafe Brauer Inspired */
+:root {
+  /* Primary colors */
+  --sage-green: #8a9a7b;
+  --sage-light: #a8b59a;
+  --sage-dark: #6b7a5e;
+
+  /* Jewel tones */
+  --ruby-red: #8b3a3a;
+  --sapphire-blue: #4a6fa5;
+  --emerald-green: #2d5d4f;
+  --amethyst: #7b6b8e;
+
+  /* Neutrals */
+  --dark-wood: #3d2f2f;
+  --cream: #f5f3f0;
+  --gold: #c9a961;
+  --gold-light: #e5d4a6;
+
+  /* Text */
+  --text-primary: #2d2d2d;
+  --text-secondary: #5a5a5a;
+  --text-light: #8a8a8a;
+
+  /* Spacing */
+  --section-padding: 8rem 2rem;
+  --content-max-width: 1200px;
+
+  /* Transitions */
+  --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Georgia', 'Garamond', serif;
+  color: var(--text-primary);
+  background-color: var(--cream);
+  line-height: 1.6;
+}
+
 #app {
-  max-width: 1280px;
+  margin: 0;
+  padding: 0;
+  background-color: var(--cream);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Georgia', 'Palatino', serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--dark-wood);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: var(--text-secondary);
+  max-width: 65ch;
+  line-height: 1.8;
+}
+
+a {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: var(--text-secondary);
+}
+
+span {
+  color: var(--dark-wood);
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 2px solid var(--sage-dark);
+  background-color: transparent;
+  color: var(--sage-dark);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  background-color: var(--sage-dark);
+  color: var(--cream);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+  background-color: var(--sage-green);
+  border-color: var(--sage-green);
+  color: var(--cream);
+}
+
+.btn-primary:hover {
+  background-color: var(--sage-dark);
+  border-color: var(--sage-dark);
+}
+
+.btn-gold {
+  background-color: var(--gold);
+  border-color: var(--gold);
+  color: var(--dark-wood);
+}
+
+.btn-gold:hover {
+  background-color: var(--gold-light);
+  border-color: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(201, 169, 97, 0.3);
+}
+
+/* Utility classes */
+.container {
+  max-width: var(--content-max-width);
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-center {
   text-align: center;
-  background-color: white;
+  align-items: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--transition-smooth);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: var(--transition-smooth);
 }
 
-.card {
-  padding: 2em;
+.slide-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-.read-the-docs {
-  color: #888;
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: var(--transition-smooth);
+}
+
+.slide-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
