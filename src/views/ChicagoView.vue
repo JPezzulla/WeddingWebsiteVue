@@ -21,6 +21,7 @@ const hotels = [
     distance: '0.3 miles from venue',
     price: '$$',
     description: 'Modern boutique hotel with rooftop bar overlooking the park.',
+    link: 'https://www.hyatt.com/events/en-US/group-booking/CHIJL/G-FFZZ',
   },
   {
     name: 'voco Chicago Downtown - Riverwalk by IHG',
@@ -131,6 +132,9 @@ const activities = [
               >
             </button>
           </a>
+          <div v-else>
+            <span class="hotel-link-text" :href="hotel.link">Booking link coming soon!</span>
+          </div>
         </div>
       </div>
     </InfoSection>

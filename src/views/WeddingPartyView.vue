@@ -4,87 +4,67 @@ import InfoSection from '../components/InfoSection.vue'
 
 interface PartyMember {
   name: string
-  subtext: string
   image: string
 }
 
-const groomsParty: PartyMember[] = [
+const weddingParty: PartyMember[] = [
   {
     name: 'Derek Scott',
-    subtext: 'Best Man',
     image: '/images/wedding-party/derek-joe.png',
   },
   {
+    name: 'Katherine Fuller',
+    image: '/images/wedding-party/katief-kait.png',
+  },
+  {
     name: 'Mary Katherine Joy',
-    subtext: 'Groomsmaid',
     image: '/images/wedding-party/katiej-joe.png',
   },
   {
+    name: 'Kaitlyn Groves',
+    image: '/images/wedding-party/katieg-kait.png',
+  },
+  {
     name: 'Maggie Fritz',
-    subtext: 'Groomsmaid',
     image: '/images/wedding-party/maggie-joe.png',
   },
   {
+    name: "Jessica D'Apice",
+    image: '/images/wedding-party/jess-kait.png',
+  },
+  {
     name: 'Maura Pezzulla',
-    subtext: 'Sister of the Groom',
     image: '/images/wedding-party/maura-joe.png',
   },
   {
+    name: 'Sam Kauffman',
+    image: '/images/wedding-party/sam-kait.png',
+  },
+  {
     name: 'Nathan Longstreth',
-    subtext: 'Groomsman',
     image: '/images/wedding-party/nate-joe.png',
   },
   {
+    name: 'Shirley Kauffman',
+    image: '/images/wedding-party/shirley-kait.png',
+  },
+  {
     name: 'Andrew Pezzulla',
-    subtext: 'Brother of the Groom',
     image: '/images/wedding-party/drew-joe.png',
   },
   {
     name: 'Luke Pezzulla',
-    subtext: 'Brother of the Groom',
     image: '/images/wedding-party/luke-joe.png',
   },
   {
     name: 'Michael Pezzulla',
-    subtext: 'Brother of the Groom',
     image: '/images/wedding-party/michael-joe.png',
   },
 ]
 
-const bridesParty: PartyMember[] = [
-  {
-    name: 'Katherine Fuller',
-    subtext: 'Maid of Honor',
-    image: '/images/wedding-party/katief-kait.png',
-  },
-  {
-    name: 'Kaitlyn Groves',
-    subtext: 'Bridesmaid',
-    image: '/images/wedding-party/katieg-kait.png',
-  },
-  {
-    name: "Jessica D'Apice",
-    subtext: 'Bridesmaid',
-    image: '/images/wedding-party/jess-kait.png',
-  },
-  {
-    name: 'Sam Kauffman',
-    subtext: 'Brother of the Bride',
-    image: '/images/wedding-party/sam-kait.png',
-  },
-  {
-    name: 'Shirley Kauffman',
-    subtext: 'Sister-in-law of the Bride',
-    image: '/images/wedding-party/shirley-kait.png',
-  },
-]
-
 const officiant = {
-  name: "Garrett Lyons",
-  images: [
-    '/images/wedding-party/garrett-joe.png',
-    '/images/wedding-party/garrett-kait.png'
-  ]
+  name: 'Garrett Lyons',
+  images: ['/images/wedding-party/garrett-joe.png', '/images/wedding-party/garrett-kait.png'],
 }
 </script>
 
@@ -98,92 +78,89 @@ const officiant = {
     background-position="right 42%"
     background-size="150%"
   >
-    <!-- Groom's Party Section -->
-    <InfoSection title="Groom's Party">
-      <div class="party-grid">
-        <div v-for="member in groomsParty" :key="member.name" class="party-member">
-          <div class="member-image">
-            <img :src="member.image" :alt="member.name" />
+    <!-- Wedding Party Section -->
+    <InfoSection title="Wedding Party">
+      <div class="party-list">
+        <div v-for="(member, index) in weddingParty" :key="member.name" class="party-member-row">
+          <div class="image-left" v-if="index % 2 === 0">
+            <div class="member-image">
+              <img
+                :src="member.image"
+                :alt="member.name"
+                :class="{
+                  'rotate-90': member.name === 'Nathan Longstreth',
+                  'shift-down': member.name === 'Sam Kauffman',
+                }"
+              />
+            </div>
           </div>
+          <div class="image-left" v-else></div>
           <h3>{{ member.name }}</h3>
-          <p class="member-subtext">{{ member.subtext }}</p>
-        </div>
-      </div>
-    </InfoSection>
-
-    <!-- Bride's Party Section -->
-    <InfoSection title="Bride's Party" :alternate="true">
-      <div class="party-grid">
-        <div v-for="member in bridesParty" :key="member.name" class="party-member">
-          <div class="member-image">
-            <img :src="member.image" :alt="member.name" />
+          <div class="image-right" v-if="index % 2 === 1">
+            <div class="member-image">
+              <img
+                :src="member.image"
+                :alt="member.name"
+                :class="{
+                  'rotate-90': member.name === 'Nathan Longstreth',
+                  'shift-down': member.name === 'Sam Kauffman',
+                }"
+              />
+            </div>
           </div>
-          <h3>{{ member.name }}</h3>
-          <p class="member-subtext">{{ member.subtext }}</p>
+          <div class="image-right" v-else></div>
         </div>
       </div>
     </InfoSection>
 
     <!-- Officiant Section -->
-    <InfoSection title="Officiant">
+    <InfoSection title="Officiant" :alternate="true">
       <div class="officiant-container">
-        <div class="party-member">
-          <div class="officiant-images">
-            <div v-for="(image, index) in officiant.images" :key="index" class="member-image officiant-image">
-              <img :src="image" :alt="`${officiant.name} - Photo ${index + 1}`" />
-            </div>
+        <div class="officiant-images">
+          <div
+            v-for="(image, index) in officiant.images"
+            :key="index"
+            class="member-image officiant-image"
+          >
+            <img :src="image" :alt="`${officiant.name} - Photo ${index + 1}`" />
           </div>
-          <h3>{{ officiant.name }}</h3>
         </div>
+        <h3 class="officiant-name">{{ officiant.name }}</h3>
       </div>
     </InfoSection>
   </PageLayout>
 </template>
 
 <style scoped>
-.party-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+.party-list {
+  display: flex;
+  flex-direction: column;
   gap: 3rem;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 2rem 0;
+}
+
+.party-member-row {
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) 320px minmax(250px, 1fr);
+  align-items: center;
+  gap: 3rem;
   justify-items: center;
 }
 
-.officiant-container {
-  display: flex;
-  justify-content: center;
-  padding: 2rem 0;
-  max-width: 1200px;
-  margin: 0 auto;
+.image-left {
+  justify-self: end;
 }
 
-.officiant-images {
-  display: flex;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-}
-
-.officiant-image {
-  width: 200px;
-  height: 200px;
-}
-
-.party-member {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+.image-right {
+  justify-self: start;
 }
 
 .member-image {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
+  width: 250px;
+  height: 250px;
   overflow: hidden;
-  margin-bottom: 1.5rem;
-  border: 4px solid var(--sage-green);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -194,41 +171,77 @@ const officiant = {
   display: block;
 }
 
-.party-member h3 {
-  font-size: 1.5rem;
-  color: var(--dark-wood);
-  margin-bottom: 0.5rem;
-  font-family: 'Georgia', 'Palatino', serif;
+.member-image img.rotate-90 {
+  transform: rotate(90deg);
 }
 
-.member-subtext {
-  font-family: 'Helvetica Neue', 'Arial', sans-serif;
-  font-size: 1rem;
-  color: var(--sage-dark);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.member-image img.shift-down {
+  object-position: center 20%;
+}
+
+.party-member-row h3 {
+  font-size: 1.8rem;
+  color: var(--dark-wood);
   margin: 0;
+  font-family: 'Georgia', 'Palatino', serif;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.officiant-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.officiant-images {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.officiant-image {
+  width: 200px;
+  height: 200px;
+  border: none;
+}
+
+.officiant-name {
+  font-size: 1.8rem;
+  color: var(--dark-wood);
+  margin: 0;
+  font-family: 'Georgia', 'Palatino', serif;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
-  .party-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .party-list {
     gap: 2rem;
     padding: 1rem 0;
   }
 
+  .party-member-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .image-left,
+  .image-right {
+    justify-self: center;
+  }
+
   .member-image {
-    width: 140px;
-    height: 140px;
+    width: 150px;
+    height: 150px;
   }
 
-  .party-member h3 {
-    font-size: 1.2rem;
-  }
-
-  .member-subtext {
-    font-size: 0.9rem;
+  .party-member-row h3 {
+    font-size: 1.3rem;
+    order: -1;
   }
 
   .officiant-images {
@@ -239,6 +252,10 @@ const officiant = {
   .officiant-image {
     width: 160px;
     height: 160px;
+  }
+
+  .officiant-name {
+    font-size: 1.5rem;
   }
 }
 </style>

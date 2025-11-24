@@ -7,6 +7,9 @@ interface Props {
   reverse?: boolean
   backgroundColor?: string
   alignTop?: boolean
+  noShadow?: boolean
+  imageOffsetX?: number
+  imagePositionX?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -14,6 +17,9 @@ const props = withDefaults(defineProps<Props>(), {
   reverse: false,
   backgroundColor: 'var(--cream)',
   alignTop: false,
+  noShadow: false,
+  imageOffsetX: 0,
+  imagePositionX: 'center',
 })
 
 const sectionRef = ref<HTMLElement | null>(null)
@@ -38,8 +44,8 @@ onMounted(() => {
     const imageHeight = imageRef.value.offsetHeight
     const windowHeight = window.innerHeight
 
-    // Calculate centered position
-    const centeredLeft = (containerRect.width - imageWidth) / 2
+    // Calculate centered position with optional offset
+    const centeredLeft = (containerRect.width - imageWidth) / 2 + props.imageOffsetX
 
     // Calculate if section is in view
     const sectionTop = sectionRect.top
@@ -81,19 +87,32 @@ onMounted(() => {
   window.addEventListener('scroll', handleScroll)
   window.addEventListener('resize', handleResize)
 
-  // Wait for image to load before initial positioning
+  // Wait for both layout and scroll restoration before initial positioning
+  const initializePosition = () => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        // Add extra delay to account for scroll restoration
+        setTimeout(() => {
+          handleScroll()
+        }, 100)
+      })
+    })
+  }
+
+  // Wait for image to load and layout to be ready before initial positioning
   if (imageRef.value) {
     const img = imageRef.value.querySelector('img')
     if (img) {
       if (img.complete) {
-        handleScroll() // Image already loaded
+        initializePosition()
       } else {
-        img.addEventListener('load', handleScroll)
+        img.addEventListener('load', initializePosition)
       }
     }
   }
 
-  handleScroll() // Initial check
+  // Initial check with delay to ensure layout and scroll position are ready
+  initializePosition()
 
   onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll)
@@ -110,8 +129,12 @@ onMounted(() => {
     :style="{ backgroundColor }"
   >
     <div ref="imageContainerRef" class="image-container">
-      <div ref="imageRef" class="sticky-image">
-        <img :src="imageSrc" :alt="imageAlt" />
+      <div ref="imageRef" class="sticky-image" :class="{ 'no-shadow': noShadow }">
+        <img
+          :src="imageSrc"
+          :alt="imageAlt"
+          :style="{ objectPosition: `${imagePositionX} center` }"
+        />
       </div>
     </div>
     <div class="content-container">
@@ -159,9 +182,14 @@ onMounted(() => {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
+.sticky-image.no-shadow {
+  box-shadow: none;
+}
+
 .sticky-image img {
   height: 100%;
-  width: auto;
+  width: 100%;
+  object-fit: cover;
   display: block;
 }
 

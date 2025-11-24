@@ -13,7 +13,12 @@ import StickySection from './StickySection.vue'
     </section>
 
     <!-- Sticky Section 1: How We Met -->
-    <StickySection image-src="/images/our-story/section-1.jpg" image-alt="How we met" :align-top="true">
+    <StickySection
+      image-src="/images/our-story/section-1.jpg"
+      image-alt="How we met"
+      :align-top="true"
+      :no-shadow="true"
+    >
       <h2>How We Met</h2>
       <p>
         Joe and Kait only had one degree of separation between them for years, having both known
@@ -53,7 +58,12 @@ import StickySection from './StickySection.vue'
     </StickySection>
 
     <!-- Sticky Section 3: First Date -->
-    <StickySection image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0038.jpg" image-alt="First date">
+    <StickySection
+      image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0038.jpg"
+      image-alt="First date"
+      :image-offset-x="-40"
+      image-position-x="15%"
+    >
       <h2>Our First Date</h2>
       <p>
         Joe flew to Chicago on January 31st 2022, and was a ball of nerves from the time he zipped
@@ -92,8 +102,52 @@ import StickySection from './StickySection.vue'
       </p>
     </StickySection>
 
-    <!-- Sticky Section 5: The Proposal -->
-    <StickySection image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0096.jpg" image-alt="The proposal">
+    <!-- Section 5: Our Life in Chicago -->
+    <section class="chicago-section">
+      <div class="chicago-image-container">
+        <div class="chicago-images">
+          <img
+            src="/images/joe-and-kait/image.png"
+            alt="Our life in Chicago"
+            class="chicago-image-1"
+          />
+          <img
+            src="/images/joe-and-kait/image copy.png"
+            alt="Our life in Chicago"
+            class="chicago-image-2"
+          />
+        </div>
+      </div>
+      <div class="chicago-content-container">
+        <div class="chicago-content">
+          <h2>Our Life in Chicago</h2>
+          <p>
+            On May 31st 2023, Joe packed his life up into his Accord and drove up to Chicago to move
+            in with Kaitlyn. She didn't have to do too much work to sell him on the idea of living
+            in Chicago, but he maintains that he'd have moved anywhere in the country to be close to
+            her. They filled up some of the new space in their Little Italy apartment by getting
+            Kaitlyn's cat Boh a little sister, Mimosa.
+          </p>
+          <p>
+            Joe and Kait have started and ended every day together since. They cherish their date
+            nights, whether they're around the corner at the local Italian place, or exploring all
+            the other incredible food that Chicago has to offer.
+          </p>
+          <p>
+            They spend their Summers at Wrigley Field and Comiskey Park, enjoying the lake shore,
+            and hanging out on patios. The winters are full of warm fires, pots of soup, bread,
+            cookies, and working through their backlog of movies.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Section 6: The Proposal -->
+    <StickySection
+      image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0096.jpg"
+      image-alt="The proposal"
+      reverse
+    >
       <h2>The Proposal</h2>
       <p>
         Joe and Kait knew very early on that neither of them was interested in being with anyone
@@ -174,6 +228,69 @@ import StickySection from './StickySection.vue'
   opacity: 0.9;
 }
 
+.chicago-section {
+  position: relative;
+  min-height: 200vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8rem;
+  padding: 8rem 4rem;
+  background-color: var(--cream);
+}
+
+.chicago-image-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chicago-images {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 700px;
+  width: 600px;
+}
+
+.chicago-images img {
+  position: absolute;
+  width: 400px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.chicago-image-1 {
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.chicago-image-2 {
+  top: 450px;
+  left: 350px;
+  z-index: 2;
+}
+
+.chicago-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 0;
+}
+
+.chicago-content {
+  max-width: 600px;
+}
+
+.chicago-content h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 2rem;
+}
+
 .timeline-cta {
   padding: 8rem 2rem;
   background-color: var(--cream);
@@ -187,6 +304,44 @@ import StickySection from './StickySection.vue'
 @media (max-width: 768px) {
   .story-header {
     padding: 5rem 1.5rem 3rem;
+  }
+
+  .chicago-section {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 3rem 1.5rem;
+    gap: 2rem;
+  }
+
+  .chicago-image-container {
+    display: block;
+  }
+
+  .chicago-images {
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+    height: 500px;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .chicago-images img {
+    width: 250px;
+    height: 320px;
+  }
+
+  .chicago-image-2 {
+    top: 280px;
+    left: 200px;
+  }
+
+  .chicago-content-container {
+    padding: 0;
+  }
+
+  .chicago-content {
+    max-width: 100%;
   }
 
   .timeline-cta {

@@ -12,7 +12,6 @@ export function useKonamiCode(callback: () => void) {
     'ArrowRight',
     'b',
     'a',
-    'Enter', // "Start" is typically Enter
   ]
 
   const userInput = ref<string[]>([])

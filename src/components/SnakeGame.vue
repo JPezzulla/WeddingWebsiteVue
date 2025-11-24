@@ -37,15 +37,15 @@ const getSegmentDirection = (index: number) => {
 
   return {
     x: previous.x - current.x,
-    y: previous.y - current.y
+    y: previous.y - current.y,
   }
 }
 
 // Get rotation angle based on direction
-const getRotationAngle = (dir: { x: number, y: number }) => {
-  if (dir.x === 1 && dir.y === 0) return 0    // Right
+const getRotationAngle = (dir: { x: number; y: number }) => {
+  if (dir.x === 1 && dir.y === 0) return 0 // Right
   if (dir.x === -1 && dir.y === 0) return 180 // Left
-  if (dir.x === 0 && dir.y === 1) return 90   // Down
+  if (dir.x === 0 && dir.y === 1) return 90 // Down
   if (dir.x === 0 && dir.y === -1) return 270 // Up
   return 0
 }
@@ -70,12 +70,13 @@ const generateFood = () => {
 
 // Handle keyboard input
 const handleKeyPress = (event: KeyboardEvent) => {
-  if (!gameStarted.value && !gameOver.value) {
+  if (!gameStarted.value && !gameOver.value && event.key === 'Enter') {
     gameStarted.value = true
     startGame()
+    return
   }
 
-  if (gameOver.value && event.key === 'Enter') {
+  if (gameOver.value) {
     resetGame()
     return
   }
@@ -102,7 +103,7 @@ const handleKeyPress = (event: KeyboardEvent) => {
 
 // Game loop
 const gameLoop = () => {
-  if (gameOver.value) return
+  if (gameOver.value || !gameStarted.value) return
 
   direction.value = nextDirection.value
 
@@ -196,7 +197,16 @@ onUnmounted(() => {
             <!-- Cat Food Can -->
             <g v-if="foodType === 'catfood'">
               <!-- Can body -->
-              <rect x="5" y="8" width="20" height="14" fill="#e5d4a6" rx="2" stroke="#c9a961" stroke-width="2" />
+              <rect
+                x="5"
+                y="8"
+                width="20"
+                height="14"
+                fill="#e5d4a6"
+                rx="2"
+                stroke="#c9a961"
+                stroke-width="2"
+              />
               <!-- Top label -->
               <rect x="5" y="8" width="20" height="4" fill="#c9a961" />
               <!-- Cat food inside -->
@@ -204,9 +214,19 @@ onUnmounted(() => {
               <!-- Shine -->
               <rect x="7" y="10" width="2" height="10" fill="#fff" opacity="0.3" />
               <!-- Label text -->
-              <text x="15" y="19" font-size="6" fill="#fff" text-anchor="middle" font-weight="bold">CAT</text>
+              <text x="15" y="19" font-size="6" fill="#fff" text-anchor="middle" font-weight="bold">
+                CAT
+              </text>
               <!-- Can ring -->
-              <ellipse cx="15" cy="8" rx="10" ry="2" fill="none" stroke="#a88b4f" stroke-width="1" />
+              <ellipse
+                cx="15"
+                cy="8"
+                rx="10"
+                ry="2"
+                fill="none"
+                stroke="#a88b4f"
+                stroke-width="1"
+              />
             </g>
 
             <!-- Roasted Chicken -->
@@ -217,7 +237,12 @@ onUnmounted(() => {
               <ellipse cx="10" cy="13" rx="3.5" ry="4.5" fill="#c9935a" />
               <ellipse cx="20" cy="13" rx="3.5" ry="4.5" fill="#c9935a" />
               <!-- Legs -->
-              <path d="M 8 21 L 9 26 M 22 21 L 21 26" stroke="#8b6f47" stroke-width="2.5" stroke-linecap="round" />
+              <path
+                d="M 8 21 L 9 26 M 22 21 L 21 26"
+                stroke="#8b6f47"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
               <!-- Roasted texture spots -->
               <circle cx="12" cy="15" r="1.2" fill="#8b6f47" />
               <circle cx="18" cy="15" r="1.2" fill="#8b6f47" />
@@ -230,38 +255,69 @@ onUnmounted(() => {
           <!-- Snake Segments -->
           <g v-for="(segment, index) in snake" :key="index">
             <!-- Determine segment type: head, body, or tail -->
-            <g :transform="`translate(${segment.x * CELL_SIZE}, ${segment.y * CELL_SIZE}) rotate(${getRotationAngle(getSegmentDirection(index)) + (index === snake.length - 1 ? 90 : 0)}, 15, 15)`">
+            <g
+              :transform="`translate(${segment.x * CELL_SIZE}, ${segment.y * CELL_SIZE}) rotate(${getRotationAngle(getSegmentDirection(index)) + (index === snake.length - 1 ? 0 : 0)}, 15, 15)`"
+            >
               <!-- HEAD (first segment) -->
               <g v-if="index === 0">
                 <!-- Tuxedo Cat Head -->
                 <g v-if="catType === 'tuxedo'">
+                  <!-- Extended neck to connect to body -->
+                  <rect x="0" y="8" width="8" height="14" fill="#2d2d2d" />
+                  <rect x="0" y="14" width="8" height="5" fill="#ffffff" />
                   <!-- Ears (behind head) -->
                   <path d="M 5 8 L 2 0 L 10 5 Z" fill="#2d2d2d" />
                   <path d="M 25 8 L 28 0 L 20 5 Z" fill="#2d2d2d" />
                   <path d="M 5 8 L 3 3 L 8 6 Z" fill="#ffb3ba" />
                   <path d="M 25 8 L 27 3 L 22 6 Z" fill="#ffb3ba" />
-                  <!-- Head -->
+                  <!-- Head (more black) -->
                   <circle cx="15" cy="15" r="13" fill="#2d2d2d" />
-                  <ellipse cx="15" cy="16" rx="8" ry="10" fill="#ffffff" />
+                  <!-- Smaller white chin area -->
+                  <ellipse cx="15" cy="20" rx="5" ry="6" fill="#ffffff" />
+                  <!-- White moustache pattern -->
+                  <ellipse cx="10" cy="17" rx="2.5" ry="1.8" fill="#ffffff" />
+                  <ellipse cx="20" cy="17" rx="2.5" ry="1.8" fill="#ffffff" />
                   <circle cx="10" cy="13" r="2.2" fill="#8a9a7b" />
                   <circle cx="20" cy="13" r="2.2" fill="#8a9a7b" />
                   <ellipse cx="15" cy="18" rx="2.5" ry="1.5" fill="#ffb3ba" />
                   <path d="M 15 19 L 12 22 M 15 19 L 18 22" stroke="#2d2d2d" stroke-width="1.2" />
                 </g>
-                <!-- Tabby Cat Head -->
+                <!-- Bengal Cat Head -->
                 <g v-else>
+                  <!-- Extended neck to connect to body -->
+                  <rect x="0" y="8" width="8" height="14" fill="#9a6633" />
+                  <rect x="0" y="11" width="8" height="10" fill="#c9a55f" />
+                  <rect x="0" y="13" width="8" height="7" fill="#e8dcc0" opacity="0.7" />
+                  <!-- Continuous stripes from body -->
+                  <rect x="0" y="13" width="0.7" height="7" fill="#433219" opacity="0.3" />
+                  <rect x="3" y="13" width="0.7" height="7" fill="#433219" opacity="0.3" />
+                  <rect x="6" y="13" width="0.7" height="7" fill="#433219" opacity="0.3" />
                   <!-- Ears (behind head) -->
-                  <path d="M 5 8 L 2 0 L 10 5 Z" fill="#d4a574" />
-                  <path d="M 25 8 L 28 0 L 20 5 Z" fill="#d4a574" />
+                  <path d="M 5 8 L 2 0 L 10 5 Z" fill="#9a6633" />
+                  <path d="M 25 8 L 28 0 L 20 5 Z" fill="#9a6633" />
                   <path d="M 5 8 L 3 3 L 8 6 Z" fill="#ffb3ba" />
                   <path d="M 25 8 L 27 3 L 22 6 Z" fill="#ffb3ba" />
-                  <!-- Head -->
-                  <circle cx="15" cy="15" r="13" fill="#d4a574" />
-                  <circle cx="10" cy="13" r="2.2" fill="#6b9b37" />
-                  <circle cx="20" cy="13" r="2.2" fill="#6b9b37" />
-                  <path d="M 8 8 L 11 5 M 19 8 L 22 5" stroke="#8b6f47" stroke-width="1.5" />
-                  <ellipse cx="15" cy="18" rx="2.5" ry="1.5" fill="#ffb3ba" />
-                  <path d="M 15 19 L 12 22 M 15 19 L 18 22" stroke="#8b6f47" stroke-width="1.2" />
+                  <!-- Head base -->
+                  <circle cx="15" cy="15" r="13" fill="#c9a55f" />
+                  <!-- Lighter overlay -->
+                  <ellipse cx="15" cy="18" rx="7" ry="8" fill="#e8dcc0" opacity="0.8" />
+                  <!-- M marking on forehead (subtle filled shapes) -->
+                  <path d="M 8 8 L 10 5 L 11 8 Z" fill="#433219" opacity="0.25" />
+                  <path d="M 19 8 L 20 5 L 22 8 Z" fill="#433219" opacity="0.25" />
+                  <path d="M 13 8 L 15 6 L 17 8 Z" fill="#433219" opacity="0.25" />
+                  <!-- Eyes -->
+                  <circle cx="10" cy="13" r="2.2" fill="#7ba641" />
+                  <circle cx="20" cy="13" r="2.2" fill="#7ba641" />
+                  <circle cx="10" cy="13" r="1.2" fill="#000000" />
+                  <circle cx="20" cy="13" r="1.2" fill="#000000" />
+                  <!-- Nose and whiskers -->
+                  <ellipse cx="15" cy="19" rx="2" ry="1.2" fill="#9a6633" />
+                  <path d="M 15 20 L 12 22 M 15 20 L 18 22" stroke="#433219" stroke-width="1.2" />
+                  <!-- Face markings/spots -->
+                  <circle cx="9" cy="10" r="1.2" fill="#433219" />
+                  <circle cx="21" cy="10" r="1.2" fill="#433219" />
+                  <circle cx="7" cy="13" r="0.8" fill="#433219" opacity="0.8" />
+                  <circle cx="23" cy="13" r="0.8" fill="#433219" opacity="0.8" />
                 </g>
               </g>
 
@@ -269,21 +325,47 @@ onUnmounted(() => {
               <g v-else-if="index === snake.length - 1">
                 <!-- Tuxedo Cat Tail -->
                 <g v-if="catType === 'tuxedo'">
+                  <!-- Extended body to connect -->
+                  <rect x="22" y="8" width="8" height="14" rx="4" fill="#2d2d2d" />
+                  <rect x="22" y="14" width="8" height="5" rx="2" fill="#ffffff" />
+                  <!-- Main body with legs -->
                   <ellipse cx="15" cy="10" rx="6.5" ry="10" fill="#2d2d2d" />
                   <ellipse cx="11" cy="18" rx="4" ry="5" fill="#2d2d2d" />
                   <ellipse cx="19" cy="18" rx="4" ry="5" fill="#2d2d2d" />
                   <ellipse cx="11" cy="20" rx="2.5" ry="1.5" fill="#ffffff" />
                   <ellipse cx="19" cy="20" rx="2.5" ry="1.5" fill="#ffffff" />
-                  <path d="M 15 3 Q 18 -1 22 2" stroke="#2d2d2d" stroke-width="4.5" fill="none" stroke-linecap="round" />
+                  <!-- Tail (pointing upward) -->
+                  <path
+                    d="M 15 8 Q 12 2 10 -3"
+                    stroke="#2d2d2d"
+                    stroke-width="4.5"
+                    fill="none"
+                    stroke-linecap="round"
+                  />
                 </g>
-                <!-- Tabby Cat Tail -->
+                <!-- Bengal Cat Tail -->
                 <g v-else>
-                  <ellipse cx="15" cy="10" rx="6.5" ry="10" fill="#d4a574" />
-                  <ellipse cx="11" cy="18" rx="4" ry="5" fill="#d4a574" />
-                  <ellipse cx="19" cy="18" rx="4" ry="5" fill="#d4a574" />
-                  <path d="M 15 3 Q 18 -1 22 2" stroke="#d4a574" stroke-width="4.5" fill="none" stroke-linecap="round" />
-                  <circle cx="11" cy="13" r="1.5" fill="#8b6f47" opacity="0.6" />
-                  <circle cx="19" cy="12" r="1.5" fill="#8b6f47" opacity="0.6" />
+                  <!-- Extended body to connect -->
+                  <rect x="22" y="8" width="8" height="14" rx="4" fill="#9a6633" />
+                  <rect x="22" y="11" width="8" height="10" rx="3" fill="#c9a55f" />
+                  <rect x="22" y="13" width="8" height="7" rx="2" fill="#e8dcc0" opacity="0.7" />
+                  <!-- Continuous stripes -->
+                  <rect x="23" y="13" width="0.7" height="7" fill="#433219" opacity="0.3" />
+                  <rect x="26" y="13" width="0.7" height="7" fill="#433219" opacity="0.3" />
+                  <!-- Main body with legs -->
+                  <ellipse cx="15" cy="10" rx="6.5" ry="10" fill="#c9a55f" />
+                  <ellipse cx="11" cy="18" rx="4" ry="5" fill="#9a6633" />
+                  <ellipse cx="19" cy="18" rx="4" ry="5" fill="#9a6633" />
+                  <ellipse cx="11" cy="21" rx="2.5" ry="1.5" fill="#e8dcc0" />
+                  <ellipse cx="19" cy="21" rx="2.5" ry="1.5" fill="#e8dcc0" />
+                  <!-- Tail (pointing upward) -->
+                  <path
+                    d="M 15 8 Q 12 2 10 -3"
+                    stroke="#9a6633"
+                    stroke-width="4.5"
+                    fill="none"
+                    stroke-linecap="round"
+                  />
                 </g>
               </g>
 
@@ -291,15 +373,31 @@ onUnmounted(() => {
               <g v-else>
                 <!-- Tuxedo Cat Body -->
                 <g v-if="catType === 'tuxedo'">
-                  <ellipse cx="15" cy="15" rx="10" ry="13" fill="#2d2d2d" />
-                  <ellipse cx="15" cy="16" rx="6.5" ry="10" fill="#ffffff" />
+                  <!-- Main torso (elongated to connect segments) -->
+                  <rect x="0" y="8" width="30" height="14" rx="4" fill="#2d2d2d" />
+                  <!-- Narrower white belly stripe -->
+                  <rect x="0" y="14" width="30" height="5" rx="2" fill="#ffffff" />
                 </g>
-                <!-- Tabby Cat Body -->
+                <!-- Bengal Cat Body -->
                 <g v-else>
-                  <ellipse cx="15" cy="15" rx="10" ry="13" fill="#d4a574" />
-                  <circle cx="11" cy="11" r="1.8" fill="#8b6f47" opacity="0.6" />
-                  <circle cx="19" cy="12" r="1.5" fill="#8b6f47" opacity="0.6" />
-                  <circle cx="15" cy="18" r="1.8" fill="#8b6f47" opacity="0.6" />
+                  <!-- Main torso (elongated to connect segments) -->
+                  <rect x="0" y="8" width="30" height="14" rx="4" fill="#9a6633" />
+                  <!-- Belly overlay layers -->
+                  <rect x="0" y="11" width="30" height="10" rx="3" fill="#c9a55f" />
+                  <rect x="0" y="13" width="30" height="7" rx="2" fill="#e8dcc0" opacity="0.7" />
+                  <!-- Continuous vertical belly stripes -->
+                  <rect x="8" y="13" width="0.7" height="7" fill="#433219" opacity="0.3" />
+                  <rect x="12" y="13" width="0.7" height="7" fill="#433219" opacity="0.3" />
+                  <rect x="15" y="13" width="0.7" height="7" fill="#433219" opacity="0.3" />
+                  <rect x="18" y="13" width="0.7" height="7" fill="#433219" opacity="0.3" />
+                  <rect x="22" y="13" width="0.7" height="7" fill="#433219" opacity="0.3" />
+                  <rect x="10" y="14" width="0.5" height="5" fill="#433219" opacity="0.25" />
+                  <rect x="20" y="14" width="0.5" height="5" fill="#433219" opacity="0.25" />
+                  <!-- Side spots/rosettes -->
+                  <circle cx="5" cy="10" r="1.2" fill="#433219" opacity="0.7" />
+                  <circle cx="25" cy="10" r="1.2" fill="#433219" opacity="0.7" />
+                  <circle cx="10" cy="9" r="1" fill="#433219" opacity="0.6" />
+                  <circle cx="20" cy="9" r="1" fill="#433219" opacity="0.6" />
                 </g>
               </g>
             </g>
@@ -308,23 +406,22 @@ onUnmounted(() => {
 
         <!-- Overlays -->
         <div v-if="!gameStarted && !gameOver" class="game-overlay">
-          <p class="overlay-text">Press any arrow key to start</p>
+          <p class="overlay-text">Press Enter to start</p>
           <p class="instructions">Use arrow keys to control the snake</p>
         </div>
 
         <div v-if="gameOver" class="game-overlay game-over-overlay">
           <p class="overlay-text">Game Over!</p>
           <p class="final-score">Final Score: {{ score }}</p>
-          <p class="instructions">Press Enter to play again</p>
+          <p class="instructions">Press any key to play again</p>
         </div>
       </div>
 
       <div class="game-info">
         <p>
           <small>
-            You're playing as {{ catType === 'tuxedo' ? 'a tuxedo cat' : 'a tabby cat' }}!
-            Catch the rotating treats (fish, cat food, and chicken) to grow into a silly long cat.
-            Good luck!
+            Help {{ catType === 'tuxedo' ? 'Mimosa' : 'Boh' }} get their dinner! Eat the chicken,
+            fish, and cat food but don't bite your own tail!
           </small>
         </p>
       </div>
