@@ -108,11 +108,17 @@ import StickySection from './StickySection.vue'
             src="/images/joe-and-kait/image.png"
             alt="Our life in Chicago"
             class="chicago-image-1"
+            loading="lazy"
+            width="350"
+            height="440"
           />
           <img
             src="/images/joe-and-kait/image copy.png"
             alt="Our life in Chicago"
             class="chicago-image-2"
+            loading="lazy"
+            width="350"
+            height="440"
           />
         </div>
       </div>

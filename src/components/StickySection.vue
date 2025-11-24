@@ -134,6 +134,7 @@ onMounted(() => {
           :src="imageSrc"
           :alt="imageAlt"
           :style="{ objectPosition: `${imagePositionX} center` }"
+          loading="lazy"
         />
       </div>
     </div>

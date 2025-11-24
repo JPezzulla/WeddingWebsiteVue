@@ -20,7 +20,8 @@ const hotels = [
     name: 'Hotel Lincoln',
     distance: '0.3 miles from venue',
     price: '$$',
-    description: 'Modern boutique hotel with rooftop bar overlooking the park.',
+    description:
+      'Modern boutique hotel with rooftop bar overlooking the park. This is where Joe and Kait will be staying for the weekend.',
     link: 'https://www.hyatt.com/events/en-US/group-booking/CHIJL/G-FFZZ',
   },
   {
