@@ -88,8 +88,11 @@ const officiant = {
                 :alt="member.name"
                 :class="{
                   'rotate-90': member.name === 'Nathan Longstreth',
-                  'shift-down': member.name === 'Sam Kauffman',
+                  'shift-down': member.name === 'Samuel Kauffman',
                 }"
+                loading="lazy"
+                width="250"
+                height="250"
               />
             </div>
           </div>
@@ -102,8 +105,11 @@ const officiant = {
                 :alt="member.name"
                 :class="{
                   'rotate-90': member.name === 'Nathan Longstreth',
-                  'shift-down': member.name === 'Sam Kauffman',
+                  'shift-down': member.name === 'Samuel Kauffman',
                 }"
+                loading="lazy"
+                width="250"
+                height="250"
               />
             </div>
           </div>
@@ -121,7 +127,13 @@ const officiant = {
             :key="index"
             class="member-image officiant-image"
           >
-            <img :src="image" :alt="`${officiant.name} - Photo ${index + 1}`" />
+            <img
+              :src="image"
+              :alt="`${officiant.name} - Photo ${index + 1}`"
+              loading="lazy"
+              width="200"
+              height="200"
+            />
           </div>
         </div>
         <h3 class="officiant-name">{{ officiant.name }}</h3>
@@ -175,7 +187,7 @@ const officiant = {
 }
 
 .member-image img.shift-down {
-  object-position: center 20%;
+  object-position: center 10%;
 }
 
 .party-member-row h3 {
