@@ -43,7 +43,7 @@ import StickySection from './StickySection.vue'
         the rest of their lives: "come to denver".
       </p>
       <p>
-        Joe coincidentally caught COVID at this wedding, and was quarantinging for 10 days
+        Joe coincidentally caught COVID at this wedding, and was quarantining for 10 days
         immediately following the New Year's wedding. He gladly took on the new opportunity to
         continue texting Kait more. They talked about the wedding, about their holidays, about their
         favorite things. On recommendation from Kait as a way to pass the time, Joe began watching
@@ -297,6 +297,62 @@ import StickySection from './StickySection.vue'
 
 .timeline-cta h2 {
   margin-bottom: 2rem;
+}
+
+/* Tablet/iPad responsive */
+@media (max-width: 1024px) {
+  .story-header {
+    padding: 5rem 2rem 3rem;
+  }
+
+  .chicago-section {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 4rem 2rem;
+    gap: 2rem;
+  }
+
+  .chicago-image-container {
+    display: block;
+    margin-bottom: 2rem;
+  }
+
+  .chicago-images {
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+    height: 550px;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  .chicago-images img {
+    width: 280px;
+    height: 350px;
+  }
+
+  .chicago-image-1 {
+    top: 0;
+    left: 0;
+  }
+
+  .chicago-image-2 {
+    top: 280px;
+    left: 200px;
+  }
+
+  .chicago-content-container {
+    padding: 0;
+  }
+
+  .chicago-content {
+    max-width: 100%;
+  }
+
+  .timeline-cta {
+    padding: 6rem 2rem;
+  }
 }
 
 /* Mobile responsive */

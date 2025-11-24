@@ -4,8 +4,8 @@ import InfoSection from '../components/InfoSection.vue'
 import AsSeenOnBearBadge from '../components/AsSeenOnBearBadge.vue'
 import router from '@/router'
 
-const goToLink = (link: string) => () => {
-  window.location.assign(link)
+const goToLink = (link: string) => {
+  window.open(link, '_blank')
 }
 
 const hotels = [
@@ -108,7 +108,7 @@ const activities = [
     gradient-from="var(--sapphire-blue)"
     gradient-to="var(--amethyst)"
     background-image="/images/joe-and-kait/Kauffman-Pezzulla-E-0023.jpg"
-    background-position="center 52%"
+    background-position="center 47%"
     background-size="cover"
   >
     <!-- Hotels Section -->
@@ -148,8 +148,8 @@ const activities = [
         <div
           v-for="restaurant in restaurants"
           :key="restaurant.name"
-          class="info-card"
-          :onclick="goToLink(restaurant.link)"
+          class="info-card restaurant-card"
+          @click="goToLink(restaurant.link)"
         >
           <h3>{{ restaurant.name }}</h3>
           <div class="card-meta">
@@ -247,6 +247,10 @@ const activities = [
   transition: all 0.3s ease;
 }
 
+.restaurant-card {
+  cursor: pointer;
+}
+
 .info-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -319,6 +323,26 @@ const activities = [
   margin-bottom: 2rem;
 }
 
+/* Tablet/iPad responsive */
+@media (max-width: 1024px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .transport-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .chicago-cta {
+    padding: 6rem 2rem;
+  }
+}
+
+/* Mobile responsive */
 @media (max-width: 768px) {
   .cards-grid,
   .transport-grid {

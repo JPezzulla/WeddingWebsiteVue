@@ -208,13 +208,13 @@ onMounted(() => {
   max-width: 600px;
 }
 
-/* Mobile responsive */
+/* Tablet/iPad responsive */
 @media (max-width: 1024px) {
   .sticky-section {
     grid-template-columns: 1fr;
     min-height: auto;
-    padding: 3rem 1.5rem;
-    gap: 2rem;
+    padding: 4rem 2rem;
+    gap: 2.5rem;
   }
 
   .sticky-section.reverse {
@@ -233,13 +233,15 @@ onMounted(() => {
     transform: none !important;
     width: 100% !important;
     height: auto !important;
-    max-height: 500px;
-    margin-bottom: 0;
+    max-height: 600px;
+    max-width: 600px;
+    margin: 0 auto;
   }
 
   .sticky-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
   }
 
   .content-container {
@@ -251,6 +253,7 @@ onMounted(() => {
   }
 }
 
+/* Mobile responsive */
 @media (max-width: 768px) {
   .sticky-section {
     padding: 2rem 1rem;
@@ -259,6 +262,11 @@ onMounted(() => {
 
   .sticky-image {
     max-height: 400px;
+    max-width: 100%;
+  }
+
+  .sticky-image img {
+    object-fit: cover;
   }
 }
 </style>

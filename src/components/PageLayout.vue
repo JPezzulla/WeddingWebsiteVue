@@ -88,4 +88,22 @@ const props = withDefaults(defineProps<Props>(), {
   color: var(--cream);
   opacity: 0.9;
 }
+
+/* Tablet/iPad responsive */
+@media (max-width: 1024px) {
+  .page-header {
+    padding: 5rem 2rem 3rem;
+  }
+
+  .page-header h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .page-header {
+    padding: 4rem 1.5rem 2.5rem;
+  }
+}
 </style>
