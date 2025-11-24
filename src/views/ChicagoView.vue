@@ -105,7 +105,6 @@ const activities = [
 <template>
   <PageLayout
     title="Explore Chicago"
-    subtitle="A guide for our out-of-town guests"
     gradient-from="var(--sapphire-blue)"
     gradient-to="var(--amethyst)"
     background-image="/images/joe-and-kait/Kauffman-Pezzulla-E-0023.jpg"

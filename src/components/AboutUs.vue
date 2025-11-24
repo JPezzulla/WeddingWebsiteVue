@@ -8,7 +8,6 @@ import StickySection from './StickySection.vue'
     <section class="story-header">
       <div class="container text-center">
         <h1>Our Story</h1>
-        <p class="subtitle">A journey of love, laughter, and adventure</p>
       </div>
     </section>
 
@@ -250,14 +249,14 @@ import StickySection from './StickySection.vue'
   position: sticky;
   top: 50%;
   transform: translateY(-50%);
-  height: 700px;
-  width: 600px;
+  height: 620px;
+  width: 530px;
 }
 
 .chicago-images img {
   position: absolute;
-  width: 400px;
-  height: 500px;
+  width: 350px;
+  height: 440px;
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
@@ -270,8 +269,8 @@ import StickySection from './StickySection.vue'
 }
 
 .chicago-image-2 {
-  top: 450px;
-  left: 350px;
+  top: 400px;
+  left: 310px;
   z-index: 2;
 }
 
@@ -310,30 +309,37 @@ import StickySection from './StickySection.vue'
     grid-template-columns: 1fr;
     min-height: auto;
     padding: 3rem 1.5rem;
-    gap: 2rem;
+    gap: 0.5rem;
   }
 
   .chicago-image-container {
     display: block;
+    margin-bottom: 0.5rem;
   }
 
   .chicago-images {
     position: relative !important;
     top: auto !important;
     transform: none !important;
-    height: 500px;
+    height: 480px;
     width: 100%;
-    margin-bottom: 0;
+    max-width: 380px;
+    margin: 0 auto 0 1.5rem;
   }
 
   .chicago-images img {
-    width: 250px;
-    height: 320px;
+    width: 190px;
+    height: 240px;
+  }
+
+  .chicago-image-1 {
+    top: 0;
+    left: 0;
   }
 
   .chicago-image-2 {
-    top: 280px;
-    left: 200px;
+    top: 170px;
+    left: 130px;
   }
 
   .chicago-content-container {

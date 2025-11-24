@@ -266,8 +266,8 @@ onMounted(() => {
   }
 
   .links-grid {
+    grid-template-columns: 1fr;
     gap: 1rem;
-    overflow-x: scroll;
   }
 }
 </style>

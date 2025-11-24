@@ -71,7 +71,6 @@ const officiant = {
 <template>
   <PageLayout
     title="Wedding Party"
-    subtitle="The special people standing by our side"
     gradient-from="var(--gold)"
     gradient-to="var(--sage-dark)"
     background-image="/images/joe-and-kait/Kauffman-Pezzulla-E-0147.jpg"
