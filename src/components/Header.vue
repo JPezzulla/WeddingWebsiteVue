@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 
 const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
@@ -16,12 +16,23 @@ const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
 }
 
+// Prevent body scroll when mobile menu is open
+watch(isMobileMenuOpen, (isOpen) => {
+  if (isOpen) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+})
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  // Clean up body overflow on unmount
+  document.body.style.overflow = ''
 })
 </script>
 
@@ -88,7 +99,7 @@ onUnmounted(() => {
         @click="closeMobileMenu"
         >Chicago</RouterLink
       >
-      <RouterLink
+      <!-- <RouterLink
         class="mobile-nav-link"
         exact-active-class="active"
         to="/rsvp"
@@ -108,12 +119,17 @@ onUnmounted(() => {
         to="/faq"
         @click="closeMobileMenu"
         >FAQ</RouterLink
-      >
+      > -->
     </nav>
-
-    <!-- Overlay -->
-    <div v-if="isMobileMenuOpen" class="overlay" @click="closeMobileMenu"></div>
   </header>
+
+  <!-- Overlay -->
+  <div
+    v-if="isMobileMenuOpen"
+    class="overlay"
+    @click="closeMobileMenu"
+    @touchstart="closeMobileMenu"
+  ></div>
 </template>
 
 <style scoped>
@@ -215,10 +231,26 @@ onUnmounted(() => {
   width: 30px;
   height: 24px;
   background: transparent;
-  border: none;
+  border: none !important;
+  outline: none !important;
   cursor: pointer;
   padding: 0;
   z-index: 1001;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none !important;
+}
+
+.hamburger:focus,
+.hamburger:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.hamburger:focus-visible {
+  outline: 2px solid var(--sage-green) !important;
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .hamburger span {
@@ -289,7 +321,6 @@ onUnmounted(() => {
 
 /* Overlay */
 .overlay {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -298,6 +329,9 @@ onUnmounted(() => {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   animation: fadeIn 0.3s ease;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @keyframes fadeIn {
@@ -337,11 +371,6 @@ onUnmounted(() => {
   /* Show mobile nav */
   .mobile-nav {
     display: flex;
-  }
-
-  /* Show overlay */
-  .overlay {
-    display: block;
   }
 }
 </style>

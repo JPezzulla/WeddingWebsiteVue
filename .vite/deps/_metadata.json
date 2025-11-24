@@ -1,0 +1,25 @@
+{
+  "hash": "d4d6d383",
+  "configHash": "3c6ee9b6",
+  "lockfileHash": "8fafb3ea",
+  "browserHash": "13525639",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "e250cf8b",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "faae022c",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-OC2UUHW7": {
+      "file": "chunk-OC2UUHW7.js"
+    }
+  }
+}

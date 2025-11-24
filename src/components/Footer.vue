@@ -202,28 +202,7 @@
 
 @media (max-width: 768px) {
   .easter-egg {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .konami-code {
-    font-size: 0.8rem;
-    gap: 0.2rem;
-    padding: 0.4rem 0.8rem;
-  }
-
-  .code-arrow {
-    font-size: 1rem;
-  }
-
-  .code-letter {
-    font-size: 0.7rem;
-    padding: 0.15rem 0.35rem;
-  }
-
-  .cat-icon {
-    width: 35px;
-    height: 35px;
+    display: none;
   }
 }
 </style>

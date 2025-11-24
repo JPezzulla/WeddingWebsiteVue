@@ -13,7 +13,7 @@ import StickySection from './StickySection.vue'
     </section>
 
     <!-- Sticky Section 1: How We Met -->
-    <StickySection image-src="/images/our-story/section-1.jpg" image-alt="How we met">
+    <StickySection image-src="/images/our-story/section-1.jpg" image-alt="How we met" :align-top="true">
       <h2>How We Met</h2>
       <p>
         Joe and Kait only had one degree of separation between them for years, having both known
@@ -53,7 +53,7 @@ import StickySection from './StickySection.vue'
     </StickySection>
 
     <!-- Sticky Section 3: First Date -->
-    <StickySection image-src="/images/our-story/section-3.jpg" image-alt="First date">
+    <StickySection image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0038.jpg" image-alt="First date">
       <h2>Our First Date</h2>
       <p>
         Joe flew to Chicago on January 31st 2022, and was a ball of nerves from the time he zipped
@@ -71,7 +71,7 @@ import StickySection from './StickySection.vue'
 
     <!-- Sticky Section 4: Adventures Together -->
     <StickySection
-      image-src="/images/our-story/section-4.jpg"
+      image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0087.jpg"
       image-alt="Adventures together"
       reverse
     >
@@ -93,7 +93,7 @@ import StickySection from './StickySection.vue'
     </StickySection>
 
     <!-- Sticky Section 5: The Proposal -->
-    <StickySection image-src="/images/our-story/section-5.jpg" image-alt="The proposal">
+    <StickySection image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0096.jpg" image-alt="The proposal">
       <h2>The Proposal</h2>
       <p>
         Joe and Kait knew very early on that neither of them was interested in being with anyone
@@ -136,6 +136,30 @@ import StickySection from './StickySection.vue'
   background: linear-gradient(135deg, var(--sage-green) 0%, var(--emerald-green) 100%);
   color: var(--cream);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.story-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/images/joe-and-kait/Kauffman-Pezzulla-E-0024.jpg');
+  background-position: 5% center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.25;
+  z-index: 0;
+  transition: none;
+  will-change: auto;
+}
+
+.story-header .container {
+  position: relative;
+  z-index: 1;
 }
 
 .story-header h1 {

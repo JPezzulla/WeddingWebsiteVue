@@ -6,12 +6,14 @@ interface Props {
   imageAlt?: string
   reverse?: boolean
   backgroundColor?: string
+  alignTop?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   imageAlt: 'Wedding photo',
   reverse: false,
   backgroundColor: 'var(--cream)',
+  alignTop: false,
 })
 
 const sectionRef = ref<HTMLElement | null>(null)
@@ -33,6 +35,7 @@ onMounted(() => {
     const sectionRect = sectionRef.value.getBoundingClientRect()
     const containerRect = imageContainerRef.value.getBoundingClientRect()
     const imageWidth = imageRef.value.offsetWidth
+    const imageHeight = imageRef.value.offsetHeight
     const windowHeight = window.innerHeight
 
     // Calculate centered position
@@ -48,13 +51,15 @@ onMounted(() => {
       imageRef.value.style.top = '50%'
       imageRef.value.style.transform = 'translateY(-50%)'
       imageRef.value.style.left = `${containerRect.left + centeredLeft}px`
-      imageRef.value.style.width = 'auto'
+      imageRef.value.style.width = `${imageWidth}px`
+      imageRef.value.style.height = `${imageHeight}px`
     } else if (sectionTop > 0) {
       // Before section reaches top
       imageRef.value.style.position = 'absolute'
       imageRef.value.style.top = '0'
       imageRef.value.style.left = `${centeredLeft}px`
-      imageRef.value.style.width = 'auto'
+      imageRef.value.style.width = ''
+      imageRef.value.style.height = ''
       imageRef.value.style.transform = 'none'
     } else if (sectionBottom <= windowHeight) {
       // After section passes bottom
@@ -62,7 +67,8 @@ onMounted(() => {
       imageRef.value.style.top = 'auto'
       imageRef.value.style.bottom = '0'
       imageRef.value.style.left = `${centeredLeft}px`
-      imageRef.value.style.width = 'auto'
+      imageRef.value.style.width = ''
+      imageRef.value.style.height = ''
       imageRef.value.style.transform = 'none'
     }
   }
@@ -74,6 +80,19 @@ onMounted(() => {
 
   window.addEventListener('scroll', handleScroll)
   window.addEventListener('resize', handleResize)
+
+  // Wait for image to load before initial positioning
+  if (imageRef.value) {
+    const img = imageRef.value.querySelector('img')
+    if (img) {
+      if (img.complete) {
+        handleScroll() // Image already loaded
+      } else {
+        img.addEventListener('load', handleScroll)
+      }
+    }
+  }
+
   handleScroll() // Initial check
 
   onUnmounted(() => {
@@ -87,7 +106,7 @@ onMounted(() => {
   <section
     ref="sectionRef"
     class="sticky-section"
-    :class="{ reverse }"
+    :class="{ reverse, 'align-top': alignTop }"
     :style="{ backgroundColor }"
   >
     <div ref="imageContainerRef" class="image-container">
@@ -151,6 +170,10 @@ onMounted(() => {
   flex-direction: column;
   justify-content: center;
   padding: 4rem 0;
+}
+
+.sticky-section.align-top .content-container {
+  justify-content: flex-start;
 }
 
 .content {

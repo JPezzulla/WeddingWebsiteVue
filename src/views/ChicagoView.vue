@@ -107,6 +107,9 @@ const activities = [
     subtitle="A guide for our out-of-town guests"
     gradient-from="var(--sapphire-blue)"
     gradient-to="var(--amethyst)"
+    background-image="/images/joe-and-kait/Kauffman-Pezzulla-E-0023.jpg"
+    background-position="center 52%"
+    background-size="cover"
   >
     <!-- Hotels Section -->
     <InfoSection
@@ -318,6 +321,18 @@ const activities = [
   .transport-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+
+  .info-card {
+    text-align: center;
+  }
+
+  .card-meta {
+    justify-content: center;
+  }
+
+  .hotel-link {
+    margin-left: 0;
   }
 }
 </style>
