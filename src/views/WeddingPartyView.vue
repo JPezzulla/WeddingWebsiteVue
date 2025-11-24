@@ -37,7 +37,7 @@ const weddingParty: PartyMember[] = [
     image: '/images/wedding-party/maura-joe.png',
   },
   {
-    name: 'Sam Kauffman',
+    name: 'Samuel Kauffman',
     image: '/images/wedding-party/sam-kait.png',
   },
   {
@@ -217,6 +217,38 @@ const officiant = {
   text-align: center;
 }
 
+/* Tablet/iPad responsive */
+@media (max-width: 1024px) {
+  .party-list {
+    gap: 2.5rem;
+    padding: 1.5rem 0;
+  }
+
+  .party-member-row {
+    grid-template-columns: 200px 1fr 200px;
+    gap: 2rem;
+  }
+
+  .member-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .party-member-row h3 {
+    font-size: 1.6rem;
+  }
+
+  .officiant-image {
+    width: 180px;
+    height: 180px;
+  }
+
+  .officiant-name {
+    font-size: 1.6rem;
+  }
+}
+
+/* Mobile responsive */
 @media (max-width: 768px) {
   .party-list {
     gap: 2rem;

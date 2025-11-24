@@ -251,8 +251,8 @@ onMounted(() => {
   margin: 0 auto;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
+/* Mobile and Tablet */
+@media (max-width: 1024px) {
   .hero {
     height: 100vh;
   }
