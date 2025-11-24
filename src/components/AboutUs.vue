@@ -13,7 +13,7 @@ import StickySection from './StickySection.vue'
 
     <!-- Sticky Section 1: How We Met -->
     <StickySection
-      image-src="/images/our-story/section-1.jpg"
+      image-src="/images/our-story/section-1-update.jpg"
       image-alt="How we met"
       :align-top="true"
       :no-shadow="true"
