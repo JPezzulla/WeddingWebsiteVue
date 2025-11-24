@@ -84,7 +84,7 @@ const handleSubmit = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&h=1200&fit=crop')
+  background: url('/images/joe-and-kait/Kauffman-Pezzulla-E-0112.jpg')
     center/cover;
   opacity: 0.2;
   z-index: 0;
