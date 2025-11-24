@@ -182,11 +182,13 @@ const activities = [
           <h3>Around the City</h3>
           <p>
             <strong>CTA Trains & Buses:</strong> Affordable and efficient public transit. Get a
-            Ventra card for easy access.
+            <a href="https://www.ventrachicago.com/" rel="noreferrer" target="_blank">Ventra</a>
+            card for easy access.
           </p>
           <p><strong>Rideshare:</strong> Uber and Lyft are widely available throughout the city.</p>
           <p>
-            <strong>Walking/Biking:</strong> Lincoln Park area is very walkable. Divvy bikes
+            <strong>Walking/Biking:</strong> Lincoln Park area is very walkable.
+            <a href="https://divvybikes.com/" rel="noreferrer" target="_blank">Divvy bikes</a>
             available for rent.
           </p>
         </div>
