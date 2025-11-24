@@ -96,8 +96,7 @@ import StickySection from './StickySection.vue'
         By the time Joe's lease was expiring in Baltimore, it was obvious to both of them that they
         never wanted another adventure in life without the other person by their side. In one of his
         last trips to Chicago as a visitor, Joe and Kait toured the apartment they now live in, and
-        signed the lease to live together. Joe packed up his life into his car and drove up to
-        Chicago in June 2023, where he and Kait have lived together since.
+        signed the lease to live together.
       </p>
     </StickySection>
 
