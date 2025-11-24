@@ -25,7 +25,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="hero-scroll-indicator">
-        <span>Scroll to explore</span>
+        <span style="color: white">Scroll to explore</span>
         <div class="scroll-arrow"></div>
       </div>
     </section>
@@ -49,6 +49,10 @@ onMounted(() => {
           <RouterLink to="/us" class="link-card">
             <h3>Our Story</h3>
             <p>Learn about our journey together</p>
+          </RouterLink>
+          <RouterLink to="/party" class="link-card">
+            <h3>Wedding Party</h3>
+            <p>Meet the special people by our side</p>
           </RouterLink>
           <RouterLink to="/chicago" class="link-card">
             <h3>Visit Chicago</h3>
@@ -164,7 +168,7 @@ onMounted(() => {
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  color: var(--cream);
+  color: #ffffff;
   font-family: 'Helvetica Neue', sans-serif;
   font-size: 0.9rem;
   letter-spacing: 0.1em;
@@ -176,8 +180,8 @@ onMounted(() => {
 .scroll-arrow {
   width: 24px;
   height: 24px;
-  border-right: 2px solid var(--cream);
-  border-bottom: 2px solid var(--cream);
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
   transform: rotate(45deg);
   margin: 1rem auto 0;
 }

@@ -58,9 +58,7 @@ const handleSubmit = () => {
         </div>
 
         <div class="footer-section">
-          <p class="hint">
-            If you don't have the password, please contact the couple.
-          </p>
+          <p class="hint">If you don't have the password, please contact the couple.</p>
         </div>
       </div>
     </div>

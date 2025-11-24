@@ -29,7 +29,15 @@ const props = withDefaults(defineProps<Props>(), {
         background: `linear-gradient(135deg, ${gradientFrom} 0%, ${gradientTo} 100%)`,
       }"
     >
-      <div v-if="backgroundImage" class="header-background" :style="{ backgroundImage: `url(${backgroundImage})`, backgroundPosition: backgroundPosition, backgroundSize: backgroundSize }"></div>
+      <div
+        v-if="backgroundImage"
+        class="header-background"
+        :style="{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundPosition: backgroundPosition,
+          backgroundSize: backgroundSize,
+        }"
+      ></div>
       <div class="container text-center">
         <h1>{{ title }}</h1>
         <p v-if="subtitle" class="subtitle">{{ subtitle }}</p>
