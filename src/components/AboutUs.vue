@@ -127,10 +127,10 @@ import StickySection from './StickySection.vue'
           <h2>Our Life in Chicago</h2>
           <p>
             On May 31st 2023, Joe packed his life up into his Accord and drove up to Chicago to move
-            in with Kaitlyn. She didn't have to do too much work to sell him on the idea of living
+            in with Kait. She didn't have to do too much work to sell him on the idea of living
             in Chicago, but he maintains that he'd have moved anywhere in the country to be close to
             her. They filled up some of the new space in their Little Italy apartment by getting
-            Kaitlyn's cat Boh a little sister, Mimosa.
+            Kait's cat Boh a little sister, Mimosa.
           </p>
           <p>
             Joe and Kait have started and ended every day together since. They cherish their date
@@ -156,14 +156,14 @@ import StickySection from './StickySection.vue'
       <p>
         Joe and Kait knew very early on that neither of them was interested in being with anyone
         else for the rest of their lives, but it wasn't until a year into living together that a
-        proposal crystallized into the next step. After shopping for rings together and finding the
+        proposal began to crystallize. After shopping for rings together and finding the
         style she knew was right, Kait graciously accepted ignorance towards her own engagement, and
         Joe got to work crafting the plan.
       </p>
       <p>
-        With the help of friends (Chicago) Katie and Sarah, Kait was brought to North Pond on
+        With the help of friends Katie F. and Sarah, Kait was brought to North Pond on
         Friday, September 27th 2024, under the guise of celebrating Sarah's (fake) promotion. Joe
-        asked her to marry him at North Pond, right by the restaurant they had their first true date
+        asked her to marry him right by the restaurant that they had their first true date
         night at. She happily said yes.
       </p>
     </StickySection>
