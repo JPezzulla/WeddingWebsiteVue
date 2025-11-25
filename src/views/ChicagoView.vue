@@ -70,7 +70,7 @@ const restaurants = [
     name: 'Mr. Beef',
     cuisine: 'Italian Beef Sandwhiches',
     description: 'Original spot for Chicago Italian Beef sandwhiches',
-    link: 'https://delseoul.com/',
+    link: 'https://www.theoriginalmrbeef.com/',
     asSeenOnBear: true,
   },
 ]
