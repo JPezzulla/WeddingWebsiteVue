@@ -17,12 +17,13 @@ const hotels = [
     link: 'https://www.viceroyhotelsandresorts.com/chicago#/booking/step-1?arrive=10%2F16%2F2026&depart=10%2F18%2F2026&group=KAUF101626',
   },
   {
-    name: 'Hotel Lincoln',
+    name: 'Hotel Lincoln*',
     distance: '0.3 miles from venue',
     price: '$$',
     description:
-      'Modern boutique hotel with rooftop bar overlooking the park. This is where Joe and Kait will be staying for the weekend.',
+      'Modern boutique hotel with rooftop bar overlooking the park.',
     link: 'https://www.hyatt.com/events/en-US/group-booking/CHIJL/G-FFZZ',
+    isHotelLincoln: true
   },
   {
     name: 'voco Chicago Downtown - Riverwalk by IHG',
@@ -125,6 +126,7 @@ const activities = [
             <span class="price">{{ hotel.price }}</span>
           </div>
           <p>{{ hotel.description }}</p>
+          <p style="padding-top: 8px; font-size: 13px; font-style: italic;" class="hotel-link-text" v-if="hotel?.isHotelLincoln">*This is where Joe and Kait will be staying.</p>
           <a :href="hotel.link" rel="noreferrer" target="_blank" v-if="hotel.link">
             <button class="hotel-link">
               <span class="hotel-link-text" :href="hotel.link"
