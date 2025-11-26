@@ -20,16 +20,16 @@ const hotels = [
     name: 'Hotel Lincoln*',
     distance: '0.3 miles from venue',
     price: '$$',
-    description:
-      'Modern boutique hotel with rooftop bar overlooking the park.',
+    description: 'Modern boutique hotel with rooftop bar overlooking the park.',
     link: 'https://www.hyatt.com/events/en-US/group-booking/CHIJL/G-FFZZ',
-    isHotelLincoln: true
+    isHotelLincoln: true,
   },
   {
-    name: 'voco Chicago Downtown - Riverwalk by IHG',
+    name: 'voco Chicago Downtown - Riverwalk',
     distance: '2.5 miles from venue',
     price: '$',
     description: 'Centrally located on the river, nearby to plenty of Chicago sightseeing.',
+    link: 'https://www.ihg.com/voco/hotels/us/en/find-hotels/select-roomrate?fromRedirect=true&qSrt=sBR&qIta=99801505&icdv=99801505&qSlH=CHIWP&qCiD=16&qCiMy=092026&qCoD=18&qCoMy=092026&qGrpCd=KPW&qAAR=6CBARC&qRtP=6CBARC&setPMCookies=true&qSHBrC=VX&qDest=350%20W.%20Wolf%20Point%20Plaza,%20Chicago,%20IL,%20US&showApp=true&adjustMonth=false&srb_u=1',
   },
 ]
 
@@ -126,7 +126,13 @@ const activities = [
             <span class="price">{{ hotel.price }}</span>
           </div>
           <p>{{ hotel.description }}</p>
-          <p style="padding-top: 8px; font-size: 13px; font-style: italic;" class="hotel-link-text" v-if="hotel?.isHotelLincoln">*This is where Joe and Kait will be staying.</p>
+          <p
+            style="padding-top: 8px; font-size: 13px; font-style: italic"
+            class="hotel-link-text"
+            v-if="hotel?.isHotelLincoln"
+          >
+            *This is where Joe and Kait will be staying.
+          </p>
           <a :href="hotel.link" rel="noreferrer" target="_blank" v-if="hotel.link">
             <button class="hotel-link">
               <span class="hotel-link-text" :href="hotel.link"
@@ -235,7 +241,7 @@ const activities = [
 }
 
 .hotel-link {
-  margin-top: 8px;
+  margin-top: auto;
   margin-left: 32px;
   align-items: center;
 }
@@ -250,6 +256,9 @@ const activities = [
   border: 1px solid rgba(107, 122, 94, 0.2);
   border-radius: 8px;
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .restaurant-card {
