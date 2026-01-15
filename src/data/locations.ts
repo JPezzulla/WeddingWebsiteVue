@@ -159,7 +159,7 @@ export const RESTAURANTS: Restaurant[] = [
     price: '$$',
     description: 'Famous for their legendary burger - worth the wait!',
     link: 'https://aucheval.com/',
-    lat: 41.8840,
+    lat: 41.884,
     lng: -87.6478,
   },
   {
@@ -186,7 +186,7 @@ export const RESTAURANTS: Restaurant[] = [
     price: '$',
     description: 'Authentic Mexican tacos in Pilsen - local favorite.',
     link: 'https://rubischicago.square.site/',
-    lat: 41.8580,
+    lat: 41.858,
     lng: -87.6627,
   },
   {
@@ -216,7 +216,7 @@ export const RESTAURANTS: Restaurant[] = [
     link: 'https://www.indiennechicago.com/',
     michelinStars: 1,
     lat: 41.8947,
-    lng: -87.6360,
+    lng: -87.636,
   },
   {
     name: 'Taquerías Atotonilco',
@@ -225,7 +225,7 @@ export const RESTAURANTS: Restaurant[] = [
     description: 'Authentic Mexican tacos and comfort food in Pilsen.',
     link: 'https://www.atotonilcochicago.com/',
     lat: 41.8586,
-    lng: -87.6590,
+    lng: -87.659,
   },
   {
     name: 'QXY Dumplings',
@@ -234,7 +234,7 @@ export const RESTAURANTS: Restaurant[] = [
     description: 'Hand-pulled noodles and authentic Chinese dumplings in Chinatown.',
     link: 'https://www.qxydumplings.com/',
     lat: 41.8526,
-    lng: -87.6320,
+    lng: -87.632,
   },
   {
     name: 'MingHin',
@@ -320,14 +320,14 @@ export const ACTIVITIES: Activity[] = [
     description: 'Iconic pier with rides, restaurants, and lakefront entertainment.',
     link: 'https://navypier.org/',
     lat: 41.8917,
-    lng: -87.6050,
+    lng: -87.605,
   },
   {
     name: 'Second City Comedy Club',
     description: 'Legendary improv comedy venue that launched many SNL careers.',
     link: 'https://www.secondcity.com/',
     lat: 41.9157,
-    lng: -87.6390,
+    lng: -87.639,
   },
   {
     name: 'Chicago Architecture River Cruise',

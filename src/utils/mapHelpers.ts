@@ -1,4 +1,5 @@
 import type { Hotel, Venue, Restaurant, Activity, Event } from '@/data/locations'
+import { captureError } from '@/config/sentry'
 
 export type MarkerCategory = 'venue' | 'hotel' | 'restaurant' | 'activity' | 'event'
 
@@ -56,10 +57,7 @@ export function getMarkerConfig(category: MarkerCategory): MarkerConfig {
   return MARKER_CONFIGS[category] || MARKER_CONFIGS.event
 }
 
-export function createVenueMarker(
-  map: google.maps.Map,
-  venue: Venue
-): google.maps.Marker {
+export function createVenueMarker(map: google.maps.Map, venue: Venue): google.maps.Marker {
   const config = getMarkerConfig('venue')
 
   const marker = new google.maps.Marker({
@@ -93,10 +91,7 @@ export function createVenueMarker(
   return marker
 }
 
-export function createHotelMarker(
-  map: google.maps.Map,
-  hotel: Hotel
-): google.maps.Marker {
+export function createHotelMarker(map: google.maps.Map, hotel: Hotel): google.maps.Marker {
   const config = getMarkerConfig('hotel')
 
   const marker = new google.maps.Marker({
@@ -134,7 +129,7 @@ export function createHotelMarker(
 
 export function createRestaurantMarker(
   map: google.maps.Map,
-  restaurant: Restaurant
+  restaurant: Restaurant,
 ): google.maps.Marker {
   const config = getMarkerConfig('restaurant')
 
@@ -171,10 +166,7 @@ export function createRestaurantMarker(
   return marker
 }
 
-export function createActivityMarker(
-  map: google.maps.Map,
-  activity: Activity
-): google.maps.Marker {
+export function createActivityMarker(map: google.maps.Map, activity: Activity): google.maps.Marker {
   const config = getMarkerConfig('activity')
 
   const marker = new google.maps.Marker({
@@ -213,7 +205,7 @@ export function createActivityMarker(
 export function createEventMarker(
   map: google.maps.Map,
   event: Event,
-  showLabel: boolean = false
+  showLabel: boolean = false,
 ): google.maps.Marker {
   const config = getMarkerConfig('event')
 
@@ -269,7 +261,7 @@ export function updateActiveMarker(
   marker: google.maps.Marker | null,
   map: google.maps.Map,
   position: google.maps.LatLngLiteral,
-  category: MarkerCategory
+  category: MarkerCategory,
 ): google.maps.Marker {
   const config = getMarkerConfig(category)
 
@@ -306,7 +298,7 @@ export function updateActiveMarker(
 export function createInfoWindowContent(
   name: string,
   category: string,
-  details?: { address?: string; time?: string; day?: string }
+  details?: { address?: string; time?: string; day?: string },
 ): string {
   const categoryLabel = category.charAt(0).toUpperCase() + category.slice(1)
 

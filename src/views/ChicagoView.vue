@@ -47,16 +47,26 @@ const goToLink = (link: string) => {
 
 const allLocations = computed<Location[]>(() => [
   ...HOTELS.map((h) => ({ name: h.name, lat: h.lat, lng: h.lng, category: 'hotel' as const })),
-  ...RESTAURANTS.map((r) => ({ name: r.name, lat: r.lat, lng: r.lng, category: 'restaurant' as const })),
-  ...ACTIVITIES.map((a) => ({ name: a.name, lat: a.lat, lng: a.lng, category: 'activity' as const })),
+  ...RESTAURANTS.map((r) => ({
+    name: r.name,
+    lat: r.lat,
+    lng: r.lng,
+    category: 'restaurant' as const,
+  })),
+  ...ACTIVITIES.map((a) => ({
+    name: a.name,
+    lat: a.lat,
+    lng: a.lng,
+    category: 'activity' as const,
+  })),
 ])
 
 const visibleHotels = computed(() => (showAllHotels.value ? HOTELS : HOTELS.slice(0, 6)))
 const visibleRestaurants = computed(() =>
-  showAllRestaurants.value ? RESTAURANTS : RESTAURANTS.slice(0, 6)
+  showAllRestaurants.value ? RESTAURANTS : RESTAURANTS.slice(0, 6),
 )
 const visibleActivities = computed(() =>
-  showAllActivities.value ? ACTIVITIES : ACTIVITIES.slice(0, 6)
+  showAllActivities.value ? ACTIVITIES : ACTIVITIES.slice(0, 6),
 )
 
 const initMap = () => {
@@ -127,7 +137,7 @@ const updateMapLocation = (locationName: string, category: MarkerCategory) => {
     activeMarker,
     map,
     { lat: location.lat, lng: location.lng },
-    category
+    category,
   )
 
   // OPTIMIZATION: Reuse InfoWindow
@@ -322,7 +332,9 @@ onMounted(() => {
                 <a href="https://www.ventrachicago.com/" rel="noreferrer" target="_blank">Ventra</a>
                 card for easy access.
               </p>
-              <p><strong>Rideshare:</strong> Uber and Lyft are widely available throughout the city.</p>
+              <p>
+                <strong>Rideshare:</strong> Uber and Lyft are widely available throughout the city.
+              </p>
               <p>
                 <strong>Walking/Biking:</strong> Lincoln Park area is very walkable.
                 <a href="https://divvybikes.com/" rel="noreferrer" target="_blank">Divvy bikes</a>

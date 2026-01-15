@@ -1,13 +1,46 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { captureError } from '@/config/sentry'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const heroVisible = ref(false)
+const showTestButton = ref(false)
 
 onMounted(() => {
   setTimeout(() => {
     heroVisible.value = true
   }, 100)
+
+  // Check for showTestErrorButton query parameter
+  showTestButton.value = route.query.showTestErrorButton === 'true'
 })
+
+const triggerTestError = () => {
+  const isProduction = import.meta.env.PROD
+  const hasDsn = !!import.meta.env.VITE_SENTRY_DSN
+
+  if (!isProduction) {
+    alert('⚠️ Sentry is disabled in development mode.\n\nTo test Sentry:\n1. Set up your Sentry DSN (see MONITORING.md)\n2. Build and deploy to production\n3. Visit your production site with ?showTestErrorButton=true')
+    return
+  }
+
+  if (!hasDsn) {
+    alert('⚠️ Sentry DSN is not configured.\n\nPlease add VITE_SENTRY_DSN to your GitHub secrets.\nSee MONITORING.md for setup instructions.')
+    return
+  }
+
+  try {
+    throw new Error('Test Error: Sentry monitoring is working! This is a test error triggered manually.')
+  } catch (error) {
+    captureError(error as Error, {
+      source: 'test-button',
+      page: 'home',
+      timestamp: new Date().toISOString(),
+    })
+    alert('✅ Test error sent to Sentry!\n\nCheck your Sentry dashboard at:\nhttps://sentry.io\n\nIt may take a few moments to appear.')
+  }
+}
 </script>
 
 <template>
@@ -66,6 +99,15 @@ onMounted(() => {
             <p>Find answers to common questions</p>
           </RouterLink> -->
         </div>
+      </div>
+    </section>
+
+    <!-- Test Error Button (only visible with query param) -->
+    <section v-if="showTestButton" class="test-section">
+      <div class="container">
+        <button @click="triggerTestError" class="test-error-btn">
+          Test Sentry Error Tracking
+        </button>
       </div>
     </section>
   </div>
@@ -268,5 +310,36 @@ onMounted(() => {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+}
+
+/* Test Section */
+.test-section {
+  padding: 2rem;
+  background-color: var(--cream);
+  text-align: center;
+}
+
+.test-error-btn {
+  padding: 1rem 2rem;
+  background-color: var(--sage-green);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.test-error-btn:hover {
+  background-color: var(--sage-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.test-error-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 </style>

@@ -1,0 +1,134 @@
+import * as Sentry from '@sentry/vue'
+import type { App } from 'vue'
+import type { Router } from 'vue-router'
+
+// Track if Sentry is initialized
+let sentryInitialized = false
+
+export function initSentry(app: App, router: Router) {
+  // Only initialize Sentry in production
+  const isProduction = import.meta.env.PROD
+  const dsn = import.meta.env.VITE_SENTRY_DSN
+
+  if (!isProduction || !dsn) {
+    console.log('Sentry disabled:', isProduction ? 'Missing DSN' : 'Development mode')
+    return
+  }
+
+  sentryInitialized = true
+
+  Sentry.init({
+    app,
+    dsn,
+    integrations: [
+      // Browser tracing for performance monitoring
+      Sentry.browserTracingIntegration({
+        router,
+        // Track navigation performance
+        routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+      }),
+      // Replay integration for session recordings (optional)
+      Sentry.replayIntegration({
+        maskAllText: false, // Set to true for privacy
+        blockAllMedia: false,
+      }),
+    ],
+
+    // Performance Monitoring
+    tracesSampleRate: 0.1, // 10% of transactions for performance monitoring
+    tracePropagationTargets: ['localhost', /^https:\/\/yourapp\.com/],
+
+    // Session Replay
+    replaysSessionSampleRate: 0.1, // 10% of sessions
+    replaysOnErrorSampleRate: 1.0, // 100% of sessions with errors
+
+    // Environment
+    environment: import.meta.env.MODE,
+    release: `wedding-website@${import.meta.env.VITE_APP_VERSION || '1.0.0'}`,
+
+    // Ignore common errors
+    ignoreErrors: [
+      // Browser extensions
+      'top.GLOBALS',
+      'canvas.contentDocument',
+      // Random network errors
+      'NetworkError',
+      'Network request failed',
+      // Google Maps errors that are non-critical
+      'ResizeObserver loop limit exceeded',
+    ],
+
+    // Before sending events, you can modify them
+    beforeSend(event, hint) {
+      // Add custom context
+      event.tags = {
+        ...event.tags,
+        page: window.location.pathname,
+      }
+
+      // Filter out development errors
+      if (event.environment === 'development') {
+        return null
+      }
+
+      return event
+    },
+
+    // Enable debug mode in development
+    debug: !isProduction,
+  })
+
+  // Set user context (optional - useful for identifying users in errors)
+  Sentry.setUser({
+    id: 'guest', // You could set a unique ID based on session
+  })
+
+  // Add breadcrumbs for better error context
+  Sentry.addBreadcrumb({
+    category: 'app',
+    message: 'Application initialized',
+    level: 'info',
+  })
+}
+
+// Helper function to manually capture errors
+export function captureError(error: Error, context?: Record<string, any>) {
+  if (!sentryInitialized) {
+    console.warn('[Sentry] Not initialized. Error:', error.message, context)
+    return
+  }
+  Sentry.captureException(error, {
+    contexts: {
+      custom: context,
+    },
+  })
+}
+
+// Helper function to capture messages
+export function captureMessage(message: string, level: Sentry.SeverityLevel = 'info') {
+  if (!sentryInitialized) {
+    console.warn('[Sentry] Not initialized. Message:', message)
+    return
+  }
+  Sentry.captureMessage(message, level)
+}
+
+// Helper function to add breadcrumbs
+export function addBreadcrumb(message: string, data?: Record<string, any>) {
+  if (!sentryInitialized) {
+    return
+  }
+  Sentry.addBreadcrumb({
+    message,
+    data,
+    level: 'info',
+  })
+}
+
+// Helper to set user context
+export function setUser(id: string, email?: string) {
+  if (!sentryInitialized) {
+    return
+  }
+  Sentry.setUser({ id, email })
+}

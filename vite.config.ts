@@ -6,7 +6,7 @@ import path from 'path'
  * Vite config that sets up the @ alias for src.
  * Uses BASE_URL env var for builds (workflow sets BASE_URL='/').
  */
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
   const base = process.env.BASE_URL || '/'
 
   return {
@@ -21,6 +21,16 @@ export default defineConfig(() => {
       },
       // ensure these extensions are resolved (optional but helpful)
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
+    },
+    build: {
+      // Generate source maps for production (hidden source maps for Sentry)
+      sourcemap: mode === 'production' ? 'hidden' : true,
+      // Optional: increase chunk size warning limit
+      chunkSizeWarningLimit: 600,
+    },
+    define: {
+      // Make app version available to Sentry
+      '__APP_VERSION__': JSON.stringify(process.env.npm_package_version || '1.0.0'),
     },
   }
 })

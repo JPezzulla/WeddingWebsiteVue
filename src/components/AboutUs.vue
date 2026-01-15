@@ -15,26 +15,22 @@ import StickySection from './StickySection.vue'
     <section class="first-section">
       <div class="first-section-content">
         <div class="first-section-image">
-          <img
-            src="/images/our-story/section-1-update.jpg"
-            alt="How we met"
-            loading="lazy"
-          />
+          <img src="/images/our-story/section-1-update.jpg" alt="How we met" loading="lazy" />
         </div>
         <div class="first-section-text">
           <h2>How We Met</h2>
           <p>
             Joe and Kait only had one degree of separation between them for years, having both known
             their friend Michael through separate walks of life, but neither had met the other until
-            they'd both graduated college. It was a game of Zoom Jeapardy during the early days of the
-            pandemic when they finally spoke for the first time, but as Joe will gladly tell anyone
-            who'll listen, it wasn't too long into the call that he'd developed a crush on the pretty
-            girl in Chicago with the tattoos and the cat.
+            they'd both graduated college. It was a game of Zoom Jeapardy during the early days of
+            the pandemic when they finally spoke for the first time, but as Joe will gladly tell
+            anyone who'll listen, it wasn't too long into the call that he'd developed a crush on
+            the pretty girl in Chicago with the tattoos and the cat.
           </p>
           <p>
-            They didn't meet in person for another stretch of time after that, when Kait came down to
-            visit friends and family in Maryland in Fall of 2021. They shared a now often mocked side
-            hug, but had yet to spend enough time together for their love to take hold.
+            They didn't meet in person for another stretch of time after that, when Kait came down
+            to visit friends and family in Maryland in Fall of 2021. They shared a now often mocked
+            side hug, but had yet to spend enough time together for their love to take hold.
           </p>
         </div>
       </div>
@@ -182,7 +178,7 @@ import StickySection from './StickySection.vue'
           We're excited to begin our next chapter together, and we're thrilled to have you join us
           as we celebrate our love on our wedding day.
         </p>
-         <!-- <div style="margin-top: 2rem">
+        <!-- <div style="margin-top: 2rem">
           <RouterLink to="/rsvp" class="btn btn-gold">RSVP to Join Us</RouterLink>
         </div>  -->
       </div>

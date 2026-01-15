@@ -81,7 +81,7 @@ const initMap = () => {
       activeMarker,
       map,
       { lat: currentEvent.lat, lng: currentEvent.lng },
-      'event'
+      'event',
     )
 
     // Show info window for initial event
@@ -89,7 +89,7 @@ const initMap = () => {
   }
 }
 
-const updateInfoWindow = (event: typeof EVENTS[0]) => {
+const updateInfoWindow = (event: (typeof EVENTS)[0]) => {
   if (!activeMarker || !infoWindow || !map) return
 
   const content = createInfoWindowContent(event.name, 'event', {
@@ -116,12 +116,7 @@ const updateMapLocation = (eventId: string) => {
   activeEventName.value = event.name
 
   // OPTIMIZATION: Reuse activeMarker instead of creating new one
-  activeMarker = updateActiveMarker(
-    activeMarker,
-    map,
-    { lat: event.lat, lng: event.lng },
-    'event'
-  )
+  activeMarker = updateActiveMarker(activeMarker, map, { lat: event.lat, lng: event.lng }, 'event')
 
   // Update info window
   updateInfoWindow(event)
