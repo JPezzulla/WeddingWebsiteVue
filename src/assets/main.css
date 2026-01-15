@@ -202,3 +202,93 @@ span {
   opacity: 1;
   transform: translateX(0);
 }
+
+/* Google Maps Marker Labels - Global Styles */
+.marker-label {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif !important;
+}
+
+/* Yellow/gold venue with black outline */
+.marker-label-venue {
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000,
+    -1px  0   0 #000,
+     1px  0   0 #000,
+     0   -1px 0 #000,
+     0    1px 0 #000,
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+    -2px  0   0 #000,
+     2px  0   0 #000,
+     0   -2px 0 #000,
+     0    2px 0 #000 !important;
+}
+
+/* Purple activities with white outline */
+.marker-label-activity {
+  text-shadow:
+    -1px -1px 0 #fff,
+     1px -1px 0 #fff,
+    -1px  1px 0 #fff,
+     1px  1px 0 #fff,
+    -1px  0   0 #fff,
+     1px  0   0 #fff,
+     0   -1px 0 #fff,
+     0    1px 0 #fff,
+    -2px -2px 0 #fff,
+     2px -2px 0 #fff,
+    -2px  2px 0 #fff,
+     2px  2px 0 #fff,
+    -2px  0   0 #fff,
+     2px  0   0 #fff,
+     0   -2px 0 #fff,
+     0    2px 0 #fff !important;
+}
+
+/* Blue hotels with white outline */
+.marker-label-hotel {
+  text-shadow:
+    -1px -1px 0 #fff,
+     1px -1px 0 #fff,
+    -1px  1px 0 #fff,
+     1px  1px 0 #fff,
+    -1px  0   0 #fff,
+     1px  0   0 #fff,
+     0   -1px 0 #fff,
+     0    1px 0 #fff,
+    -2px -2px 0 #fff,
+     2px -2px 0 #fff,
+    -2px  2px 0 #fff,
+     2px  2px 0 #fff,
+    -2px  0   0 #fff,
+     2px  0   0 #fff,
+     0   -2px 0 #fff,
+     0    2px 0 #fff !important;
+}
+
+/* Red restaurants/events with white outline */
+.marker-label-restaurant,
+.marker-label-event {
+  text-shadow:
+    -1px -1px 0 #fff,
+     1px -1px 0 #fff,
+    -1px  1px 0 #fff,
+     1px  1px 0 #fff,
+    -1px  0   0 #fff,
+     1px  0   0 #fff,
+     0   -1px 0 #fff,
+     0    1px 0 #fff,
+    -2px -2px 0 #fff,
+     2px -2px 0 #fff,
+    -2px  2px 0 #fff,
+     2px  2px 0 #fff,
+    -2px  0   0 #fff,
+     2px  0   0 #fff,
+     0   -2px 0 #fff,
+     0    2px 0 #fff !important;
+}

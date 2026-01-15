@@ -17,7 +17,7 @@ const weddingParty: PartyMember[] = [
     image: '/images/wedding-party/katief-kait.png',
   },
   {
-    name: 'Mary Katherine Joy',
+    name: 'Mary Katheryn Joy',
     image: '/images/wedding-party/katiej-joe.png',
   },
   {
@@ -45,7 +45,7 @@ const weddingParty: PartyMember[] = [
     image: '/images/wedding-party/nate-joe.png',
   },
   {
-    name: 'Shirley Kauffman',
+    name: 'Shirly Kauffman',
     image: '/images/wedding-party/shirley-kait.png',
   },
   {

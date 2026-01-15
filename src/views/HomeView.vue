@@ -19,10 +19,9 @@ onMounted(() => {
         <div class="hero-divider"></div>
         <p class="hero-date">October 17th, 2026</p>
         <p class="hero-venue">Cafe Brauer · Lincoln Park · Chicago</p>
-        <div class="hero-cta">
-          RSVP Available Soon!
-          <!-- <RouterLink to="/rsvp" class="btn btn-primary">RSVP Now</RouterLink> -->
-        </div>
+        <!-- <div class="hero-cta">
+          <RouterLink to="/rsvp" class="btn btn-primary">RSVP Now</RouterLink>
+        </div> -->
       </div>
       <div class="hero-scroll-indicator">
         <span style="color: white">Scroll to explore</span>

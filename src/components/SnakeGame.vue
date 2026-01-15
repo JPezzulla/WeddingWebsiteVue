@@ -50,13 +50,13 @@ const getRotationAngle = (dir: { x: number; y: number }) => {
   return 0
 }
 
-// Generate random food position
+// Generate random food position (at least 1 cell away from borders)
 const generateFood = () => {
   let newFood: { x: number; y: number }
   do {
     newFood = {
-      x: Math.floor(Math.random() * GRID_SIZE),
-      y: Math.floor(Math.random() * GRID_SIZE),
+      x: Math.floor(Math.random() * (GRID_SIZE - 2)) + 1,
+      y: Math.floor(Math.random() * (GRID_SIZE - 2)) + 1,
     }
   } while (snake.value.some((segment) => segment.x === newFood.x && segment.y === newFood.y))
 

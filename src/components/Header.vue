@@ -63,6 +63,7 @@ onUnmounted(() => {
           >Wedding Party</RouterLink
         >
         <RouterLink class="nav-link" exact-active-class="active" to="/chicago">Chicago</RouterLink>
+        <RouterLink class="nav-link" exact-active-class="active" to="/schedule">Schedule</RouterLink>
         <!-- <RouterLink class="nav-link" exact-active-class="active" to="/rsvp">RSVP</RouterLink> -->
         <!-- <RouterLink class="nav-link" exact-active-class="active" to="/registry">Registry</RouterLink> -->
         <!-- <RouterLink class="nav-link" exact-active-class="active" to="/faq">FAQ</RouterLink> -->
@@ -99,14 +100,21 @@ onUnmounted(() => {
         @click="closeMobileMenu"
         >Chicago</RouterLink
       >
-      <!-- <RouterLink
+      <RouterLink
+        class="mobile-nav-link"
+        exact-active-class="active"
+        to="/schedule"
+        @click="closeMobileMenu"
+        >Schedule</RouterLink
+      >
+       <!--<RouterLink
         class="mobile-nav-link"
         exact-active-class="active"
         to="/rsvp"
         @click="closeMobileMenu"
         >RSVP</RouterLink
-      >
-      <RouterLink
+      >-->
+      <!--<RouterLink
         class="mobile-nav-link"
         exact-active-class="active"
         to="/registry"

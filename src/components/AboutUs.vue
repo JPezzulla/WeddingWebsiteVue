@@ -11,28 +11,34 @@ import StickySection from './StickySection.vue'
       </div>
     </section>
 
-    <!-- Sticky Section 1: How We Met -->
-    <StickySection
-      image-src="/images/our-story/section-1-update.jpg"
-      image-alt="How we met"
-      :align-top="true"
-      :no-shadow="true"
-    >
-      <h2>How We Met</h2>
-      <p>
-        Joe and Kait only had one degree of separation between them for years, having both known
-        their friend Michael through separate walks of life, but neither had met the other until
-        they'd both graduated college. It was a game of Zoom Jeapardy during the early days of the
-        pandemic when they finally spoke for the first time, but as Joe will gladly tell anyone
-        who'll listen, it wasn't too long into the call that he'd developed a crush on the pretty
-        girl in Chicago with the tattoos and the cat.
-      </p>
-      <p>
-        They didn't meet in person for another stretch of time after that, when Kait came down to
-        visit friends and family in Maryland in Fall of 2021. They shared a now often mocked side
-        hug, but had yet to spend enough time together for their love to take hold.
-      </p>
-    </StickySection>
+    <!-- Section 1: How We Met (scrolls together) -->
+    <section class="first-section">
+      <div class="first-section-content">
+        <div class="first-section-image">
+          <img
+            src="/images/our-story/section-1-update.jpg"
+            alt="How we met"
+            loading="lazy"
+          />
+        </div>
+        <div class="first-section-text">
+          <h2>How We Met</h2>
+          <p>
+            Joe and Kait only had one degree of separation between them for years, having both known
+            their friend Michael through separate walks of life, but neither had met the other until
+            they'd both graduated college. It was a game of Zoom Jeapardy during the early days of the
+            pandemic when they finally spoke for the first time, but as Joe will gladly tell anyone
+            who'll listen, it wasn't too long into the call that he'd developed a crush on the pretty
+            girl in Chicago with the tattoos and the cat.
+          </p>
+          <p>
+            They didn't meet in person for another stretch of time after that, when Kait came down to
+            visit friends and family in Maryland in Fall of 2021. They shared a now often mocked side
+            hug, but had yet to spend enough time together for their love to take hold.
+          </p>
+        </div>
+      </div>
+    </section>
 
     <StickySection image-src="/images/our-story/section-2.jpg" image-alt="Falling in love" reverse>
       <h2>Falling in Love</h2>
@@ -176,9 +182,9 @@ import StickySection from './StickySection.vue'
           We're excited to begin our next chapter together, and we're thrilled to have you join us
           as we celebrate our love on our wedding day.
         </p>
-        <!-- <div style="margin-top: 2rem">
+         <!-- <div style="margin-top: 2rem">
           <RouterLink to="/rsvp" class="btn btn-gold">RSVP to Join Us</RouterLink>
-        </div> -->
+        </div>  -->
       </div>
     </section>
   </div>
@@ -230,6 +236,48 @@ import StickySection from './StickySection.vue'
   font-style: italic;
   color: var(--cream);
   opacity: 0.9;
+}
+
+.first-section {
+  background-color: var(--cream);
+  padding: 6rem 4rem;
+}
+
+.first-section-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.first-section-image {
+  width: 100%;
+}
+
+.first-section-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.first-section-text {
+  max-width: 600px;
+}
+
+.first-section-text h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+}
+
+.first-section-text p {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
 }
 
 .chicago-section {
@@ -310,6 +358,19 @@ import StickySection from './StickySection.vue'
     padding: 5rem 2rem 3rem;
   }
 
+  .first-section {
+    padding: 4rem 2rem;
+  }
+
+  .first-section-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .first-section-text {
+    max-width: 100%;
+  }
+
   .chicago-section {
     grid-template-columns: 1fr;
     min-height: auto;
@@ -364,6 +425,14 @@ import StickySection from './StickySection.vue'
 @media (max-width: 768px) {
   .story-header {
     padding: 5rem 1.5rem 3rem;
+  }
+
+  .first-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .first-section-content {
+    gap: 2rem;
   }
 
   .chicago-section {
