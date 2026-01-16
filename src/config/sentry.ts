@@ -18,32 +18,22 @@ export async function initSentry(app: App, router: Router) {
   // Wrap in try-catch to prevent Sentry from breaking the app
   try {
     // Dynamically import Sentry only when needed
-    const SentryModule = await import('@sentry/vue')
-    Sentry = SentryModule
-
-    const {
-      init,
-      browserTracingIntegration,
-      vueRouterInstrumentation,
-      replayIntegration,
-      setUser,
-      addBreadcrumb,
-    } = SentryModule
+    Sentry = await import('@sentry/vue')
 
     sentryInitialized = true
 
-    init({
+    Sentry.init({
       app,
       dsn,
       integrations: [
         // Browser tracing for performance monitoring
-        browserTracingIntegration({
+        Sentry.browserTracingIntegration({
           router,
           // Track navigation performance
-          routingInstrumentation: vueRouterInstrumentation(router),
+          routingInstrumentation: Sentry.vueRouterInstrumentation(router),
         }),
         // Replay integration for session recordings (optional)
-        replayIntegration({
+        Sentry.replayIntegration({
           maskAllText: false, // Set to true for privacy
           blockAllMedia: false,
         }),
@@ -94,12 +84,12 @@ export async function initSentry(app: App, router: Router) {
     })
 
     // Set user context (optional - useful for identifying users in errors)
-    setUser({
+    Sentry.setUser({
       id: 'guest', // You could set a unique ID based on session
     })
 
     // Add breadcrumbs for better error context
-    addBreadcrumb({
+    Sentry.addBreadcrumb({
       category: 'app',
       message: 'Application initialized',
       level: 'info',
