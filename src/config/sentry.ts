@@ -1,11 +1,11 @@
+import * as Sentry from '@sentry/vue'
 import type { App } from 'vue'
 import type { Router } from 'vue-router'
 
 // Track if Sentry is initialized
 let sentryInitialized = false
-let Sentry: any = null
 
-export async function initSentry(app: App, router: Router) {
+export function initSentry(app: App, router: Router) {
   // Only initialize Sentry in production
   const isProduction = import.meta.env.PROD
   const dsn = import.meta.env.VITE_SENTRY_DSN
@@ -17,9 +17,6 @@ export async function initSentry(app: App, router: Router) {
 
   // Wrap in try-catch to prevent Sentry from breaking the app
   try {
-    // Dynamically import Sentry only when needed
-    Sentry = await import('@sentry/vue')
-
     sentryInitialized = true
 
     Sentry.init({
@@ -103,7 +100,7 @@ export async function initSentry(app: App, router: Router) {
 
 // Helper function to manually capture errors
 export function captureError(error: Error, context?: Record<string, any>) {
-  if (!sentryInitialized || !Sentry) {
+  if (!sentryInitialized) {
     console.warn('[Sentry] Not initialized. Error:', error.message, context)
     return
   }
@@ -115,8 +112,8 @@ export function captureError(error: Error, context?: Record<string, any>) {
 }
 
 // Helper function to capture messages
-export function captureMessage(message: string, level: 'info' | 'warning' | 'error' = 'info') {
-  if (!sentryInitialized || !Sentry) {
+export function captureMessage(message: string, level: Sentry.SeverityLevel = 'info') {
+  if (!sentryInitialized) {
     console.warn('[Sentry] Not initialized. Message:', message)
     return
   }
@@ -125,7 +122,7 @@ export function captureMessage(message: string, level: 'info' | 'warning' | 'err
 
 // Helper function to add breadcrumbs
 export function addBreadcrumb(message: string, data?: Record<string, any>) {
-  if (!sentryInitialized || !Sentry) {
+  if (!sentryInitialized) {
     return
   }
   Sentry.addBreadcrumb({
@@ -137,7 +134,7 @@ export function addBreadcrumb(message: string, data?: Record<string, any>) {
 
 // Helper to set user context
 export function setUser(id: string, email?: string) {
-  if (!sentryInitialized || !Sentry) {
+  if (!sentryInitialized) {
     return
   }
   Sentry.setUser({ id, email })
