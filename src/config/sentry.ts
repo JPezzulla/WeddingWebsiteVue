@@ -23,11 +23,9 @@ export function initSentry(app: App, router: Router) {
       app,
       dsn,
       integrations: [
-        // Browser tracing for performance monitoring
+        // Browser tracing for performance monitoring with Vue Router
         Sentry.browserTracingIntegration({
-          router,
-          // Track navigation performance
-          routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+          router, // Router integration happens automatically
         }),
         // Replay integration for session recordings (optional)
         Sentry.replayIntegration({
