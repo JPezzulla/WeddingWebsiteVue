@@ -52,6 +52,7 @@ const triggerTestError = () => {
         <div class="hero-divider"></div>
         <p class="hero-date">October 17th, 2026</p>
         <p class="hero-venue">Cafe Brauer · Lincoln Park · Chicago</p>
+        <p class="hero-invitation">Invitation to follow</p>
         <!-- <div class="hero-cta">
           <RouterLink to="/rsvp" class="btn btn-primary">RSVP Now</RouterLink>
         </div> -->
@@ -196,6 +197,15 @@ const triggerTestError = () => {
   font-family: 'Helvetica Neue', sans-serif;
   color: var(--cream);
   opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+.hero-invitation {
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  font-family: 'Georgia', serif;
+  color: var(--cream);
+  opacity: 0.85;
+  font-style: italic;
   margin-bottom: 3rem;
 }
 

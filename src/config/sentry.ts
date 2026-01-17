@@ -10,8 +10,6 @@ export function initSentry(app: App, router: Router) {
   const isProduction = import.meta.env.PROD
   const dsn = import.meta.env.VITE_SENTRY_DSN
 
-  console.log('[Sentry] Init check:', { isProduction, hasDsn: !!dsn })
-
   if (!isProduction || !dsn) {
     console.log('Sentry disabled:', isProduction ? 'Missing DSN' : 'Development mode')
     return
@@ -62,11 +60,6 @@ export function initSentry(app: App, router: Router) {
 
       // Before sending events, you can modify them
       beforeSend(event, hint) {
-        console.log('[Sentry] beforeSend called:', {
-          environment: event.environment,
-          exception: event.exception,
-        })
-
         // Add custom context
         event.tags = {
           ...event.tags,
@@ -75,16 +68,14 @@ export function initSentry(app: App, router: Router) {
 
         // Filter out development errors
         if (event.environment === 'development') {
-          console.warn('[Sentry] Blocking event - development environment')
           return null
         }
 
-        console.log('[Sentry] Allowing event to send')
         return event
       },
 
-      // Enable debug mode to diagnose issues
-      debug: true,
+      // Enable debug mode in development
+      debug: !isProduction,
     })
 
     // Set user context (optional - useful for identifying users in errors)
@@ -98,8 +89,6 @@ export function initSentry(app: App, router: Router) {
       message: 'Application initialized',
       level: 'info',
     })
-
-    console.log('[Sentry] Successfully initialized!')
   } catch (error) {
     // If Sentry fails to initialize, log error but don't break the app
     console.error('Failed to initialize Sentry:', error)
@@ -109,20 +98,16 @@ export function initSentry(app: App, router: Router) {
 
 // Helper function to manually capture errors
 export function captureError(error: Error, context?: Record<string, any>) {
-  console.log('[Sentry] captureError called:', { sentryInitialized, error: error.message, context })
-
   if (!sentryInitialized) {
     console.warn('[Sentry] Not initialized. Error:', error.message, context)
     return
   }
 
-  console.log('[Sentry] Sending error to Sentry...')
-  const eventId = Sentry.captureException(error, {
+  Sentry.captureException(error, {
     contexts: {
       custom: context,
     },
   })
-  console.log('[Sentry] Error sent with eventId:', eventId)
 }
 
 // Helper function to capture messages
