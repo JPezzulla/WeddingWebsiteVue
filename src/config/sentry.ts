@@ -62,6 +62,11 @@ export function initSentry(app: App, router: Router) {
 
       // Before sending events, you can modify them
       beforeSend(event, hint) {
+        console.log('[Sentry] beforeSend called:', {
+          environment: event.environment,
+          exception: event.exception,
+        })
+
         // Add custom context
         event.tags = {
           ...event.tags,
@@ -70,9 +75,11 @@ export function initSentry(app: App, router: Router) {
 
         // Filter out development errors
         if (event.environment === 'development') {
+          console.warn('[Sentry] Blocking event - development environment')
           return null
         }
 
+        console.log('[Sentry] Allowing event to send')
         return event
       },
 
@@ -102,15 +109,20 @@ export function initSentry(app: App, router: Router) {
 
 // Helper function to manually capture errors
 export function captureError(error: Error, context?: Record<string, any>) {
+  console.log('[Sentry] captureError called:', { sentryInitialized, error: error.message, context })
+
   if (!sentryInitialized) {
     console.warn('[Sentry] Not initialized. Error:', error.message, context)
     return
   }
-  Sentry.captureException(error, {
+
+  console.log('[Sentry] Sending error to Sentry...')
+  const eventId = Sentry.captureException(error, {
     contexts: {
       custom: context,
     },
   })
+  console.log('[Sentry] Error sent with eventId:', eventId)
 }
 
 // Helper function to capture messages
