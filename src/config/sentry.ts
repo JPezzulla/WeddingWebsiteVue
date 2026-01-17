@@ -10,6 +10,8 @@ export function initSentry(app: App, router: Router) {
   const isProduction = import.meta.env.PROD
   const dsn = import.meta.env.VITE_SENTRY_DSN
 
+  console.log('[Sentry] Init check:', { isProduction, hasDsn: !!dsn })
+
   if (!isProduction || !dsn) {
     console.log('Sentry disabled:', isProduction ? 'Missing DSN' : 'Development mode')
     return
@@ -89,6 +91,8 @@ export function initSentry(app: App, router: Router) {
       message: 'Application initialized',
       level: 'info',
     })
+
+    console.log('[Sentry] Successfully initialized!')
   } catch (error) {
     // If Sentry fails to initialize, log error but don't break the app
     console.error('Failed to initialize Sentry:', error)
