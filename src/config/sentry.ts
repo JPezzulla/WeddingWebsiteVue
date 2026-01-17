@@ -83,8 +83,8 @@ export function initSentry(app: App, router: Router) {
         return event
       },
 
-      // Enable debug mode in development
-      debug: !isProduction,
+      // Enable debug mode to diagnose issues
+      debug: true,
     })
 
     // Set user context (optional - useful for identifying users in errors)
