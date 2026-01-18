@@ -348,7 +348,7 @@ export const ACTIVITIES: Activity[] = [
 export const EVENTS: Event[] = [
   {
     id: 'welcome',
-    day: 'Thursday',
+    day: 'Friday',
     date: 'October 16th, 2026',
     time: '6:00 PM CST',
     name: 'Welcome Party',
@@ -360,7 +360,7 @@ export const EVENTS: Event[] = [
   },
   {
     id: 'wedding',
-    day: 'Friday',
+    day: 'Saturday',
     date: 'October 17th, 2026',
     time: '5:00 PM CST',
     name: 'Wedding Ceremony & Reception',
@@ -372,7 +372,7 @@ export const EVENTS: Event[] = [
   },
   {
     id: 'afterparty',
-    day: 'Friday',
+    day: 'Saturday',
     date: 'October 17th, 2026',
     time: '12:00 AM CST',
     name: 'After Party',
