@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 /**
  * Vite config that sets up the @ alias for src.
@@ -13,6 +14,13 @@ export default defineConfig(({ mode }) => {
     base,
     plugins: [
       vue(),
+      // Bundle analyzer - generates stats.html after build
+      visualizer({
+        filename: './dist/stats.html',
+        open: false,
+        gzipSize: true,
+        brotliSize: true,
+      }),
     ],
     resolve: {
       alias: {

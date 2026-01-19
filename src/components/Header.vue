@@ -134,12 +134,7 @@ onUnmounted(() => {
   </header>
 
   <!-- Overlay -->
-  <div
-    v-if="isMobileMenuOpen"
-    class="overlay"
-    @click="closeMobileMenu"
-    @touchstart="closeMobileMenu"
-  ></div>
+  <div v-if="isMobileMenuOpen" class="overlay" @click="closeMobileMenu"></div>
 </template>
 
 <style scoped>

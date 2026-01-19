@@ -23,9 +23,15 @@ const toggle = () => {
 
 <template>
   <div class="mobile-toggle-container">
-    <div class="segmented-control" @click="toggle">
+    <button
+      class="segmented-control"
+      @click="toggle"
+      :aria-label="`Toggle between ${leftOption.label} and ${rightOption.label}`"
+      :aria-pressed="modelValue"
+      type="button"
+    >
       <div class="segmented-bubble" :class="{ 'bubble-right': modelValue }"></div>
-      <div class="segment-btn" :class="{ active: !modelValue }">
+      <div class="segment-btn" :class="{ active: !modelValue }" :aria-hidden="modelValue">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -40,7 +46,7 @@ const toggle = () => {
         ></svg>
         <span v-if="!modelValue">{{ leftOption.label }}</span>
       </div>
-      <div class="segment-btn" :class="{ active: modelValue }">
+      <div class="segment-btn" :class="{ active: modelValue }" :aria-hidden="!modelValue">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -55,7 +61,7 @@ const toggle = () => {
         ></svg>
         <span v-if="modelValue">{{ rightOption.label }}</span>
       </div>
-    </div>
+    </button>
   </div>
 </template>
 
@@ -73,6 +79,12 @@ const toggle = () => {
   padding: 5px 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  font-family: inherit;
+}
+
+.segmented-control:focus-visible {
+  outline: 2px solid var(--sage-green);
+  outline-offset: 4px;
 }
 
 .segmented-bubble {
