@@ -2,10 +2,15 @@
 import { ref, onMounted } from 'vue'
 import { captureError } from '@/config/sentry'
 import { useRoute } from 'vue-router'
+import Toast from '@/components/Toast.vue'
 
 const route = useRoute()
 const heroVisible = ref(false)
 const showTestButton = ref(false)
+const showToast = ref(false)
+const toastMessage = ref('')
+
+const isMobile = () => window.innerWidth <= 768
 
 onMounted(() => {
   setTimeout(() => {
@@ -14,7 +19,27 @@ onMounted(() => {
 
   // Check for showTestErrorButton query parameter
   showTestButton.value = route.query.showTestErrorButton === 'true'
+
+  // Check if easter egg toast has been shown this session
+  const hasSeenToast = sessionStorage.getItem('easterEggToastShown')
+
+  if (!hasSeenToast) {
+    // Show toast after 3 seconds
+    setTimeout(() => {
+      if (isMobile()) {
+        toastMessage.value = '🎮 Try visiting on desktop to see all the easter eggs the site has!'
+      } else {
+        toastMessage.value = "🎮 There's a game hidden in the site, try and find the easter egg that reveals it!"
+      }
+      showToast.value = true
+      sessionStorage.setItem('easterEggToastShown', 'true')
+    }, 3000)
+  }
 })
+
+const closeToast = () => {
+  showToast.value = false
+}
 
 const triggerTestError = () => {
   const isProduction = import.meta.env.PROD
@@ -111,6 +136,9 @@ const triggerTestError = () => {
         </button>
       </div>
     </section>
+
+    <!-- Easter Egg Toast Notification -->
+    <Toast v-if="showToast" :message="toastMessage" @close="closeToast" />
   </div>
 </template>
 
