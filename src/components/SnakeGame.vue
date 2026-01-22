@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { useLeaderboard } from '@/composables/useLeaderboard'
 
 const emit = defineEmits<{
   close: []
 }>()
+
+const { scores, loading: leaderboardLoading, submitScore, fetchTopScores } = useLeaderboard()
 
 // Game configuration
 const GRID_SIZE = 20
@@ -21,6 +24,12 @@ const gameOver = ref(false)
 const gameStarted = ref(false)
 const gameInterval = ref<number | null>(null)
 const catType = ref<'tuxedo' | 'tabby'>(Math.random() > 0.5 ? 'tuxedo' : 'tabby')
+
+// Leaderboard state
+const showNameInput = ref(false)
+const playerName = ref('')
+const submitting = ref(false)
+const showLeaderboard = ref(true)
 
 const canvasSize = computed(() => GRID_SIZE * CELL_SIZE)
 
@@ -70,6 +79,11 @@ const generateFood = () => {
 
 // Handle keyboard input
 const handleKeyPress = (event: KeyboardEvent) => {
+  // Don't handle keyboard if name input is showing
+  if (showNameInput.value) {
+    return
+  }
+
   if (!gameStarted.value && !gameOver.value && event.key === 'Enter') {
     gameStarted.value = true
     startGame()
@@ -116,12 +130,14 @@ const gameLoop = () => {
   // Check collision with walls
   if (newHead.x < 0 || newHead.x >= GRID_SIZE || newHead.y < 0 || newHead.y >= GRID_SIZE) {
     gameOver.value = true
+    showNameInput.value = true
     return
   }
 
   // Check collision with self
   if (snake.value.some((segment) => segment.x === newHead.x && segment.y === newHead.y)) {
     gameOver.value = true
+    showNameInput.value = true
     return
   }
 
@@ -141,6 +157,25 @@ const startGame = () => {
   gameInterval.value = window.setInterval(gameLoop, INITIAL_SPEED)
 }
 
+const handleSubmitScore = async () => {
+  if (!playerName.value.trim() || submitting.value) return
+
+  submitting.value = true
+  const success = await submitScore(playerName.value, score.value)
+
+  if (success) {
+    showNameInput.value = false
+    playerName.value = ''
+  }
+
+  submitting.value = false
+}
+
+const skipSubmit = () => {
+  showNameInput.value = false
+  playerName.value = ''
+}
+
 const resetGame = () => {
   snake.value = [{ x: 10, y: 10 }]
   direction.value = { x: 1, y: 0 }
@@ -148,6 +183,8 @@ const resetGame = () => {
   score.value = 0
   gameOver.value = false
   gameStarted.value = false
+  showNameInput.value = false
+  playerName.value = ''
   catType.value = Math.random() > 0.5 ? 'tuxedo' : 'tabby'
   generateFood()
 }
@@ -155,6 +192,7 @@ const resetGame = () => {
 onMounted(() => {
   window.addEventListener('keydown', handleKeyPress)
   generateFood()
+  fetchTopScores()
 })
 
 onUnmounted(() => {
@@ -425,6 +463,42 @@ onUnmounted(() => {
           </small>
         </p>
       </div>
+
+      <!-- Leaderboard -->
+      <div v-if="showLeaderboard" class="leaderboard-section">
+        <h3>🏆 Top Scores</h3>
+        <div v-if="leaderboardLoading" class="leaderboard-loading">Loading...</div>
+        <div v-else-if="scores.length === 0" class="leaderboard-empty">No scores yet. Be the first!</div>
+        <ol v-else class="leaderboard">
+          <li v-for="(entry, index) in scores" :key="entry.id" class="leaderboard-entry">
+            <span class="rank">{{ index + 1 }}.</span>
+            <span class="name">{{ entry.name }}</span>
+            <span class="score-value">{{ entry.score }}</span>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Name Input Modal (shows after game over) -->
+      <div v-if="showNameInput" class="name-input-overlay">
+        <div class="name-input-modal">
+          <h3>Submit Your Score!</h3>
+          <p class="score-display">You scored: {{ score }}</p>
+          <input
+            v-model="playerName"
+            type="text"
+            placeholder="Enter your name"
+            maxlength="20"
+            class="name-input"
+            @keydown.enter="handleSubmitScore"
+          />
+          <div class="name-input-buttons">
+            <button @click="handleSubmitScore" :disabled="!playerName.trim() || submitting" class="submit-btn">
+              {{ submitting ? 'Submitting...' : 'Submit' }}
+            </button>
+            <button @click="skipSubmit" class="skip-btn">Skip</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -634,5 +708,176 @@ onUnmounted(() => {
   .game-info p {
     font-size: 0.75rem;
   }
+}
+
+/* Leaderboard */
+.leaderboard-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--cream);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.leaderboard-section h3 {
+  text-align: center;
+  color: var(--sage-dark);
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+}
+
+.leaderboard {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.leaderboard-entry {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(138, 154, 123, 0.2);
+  transition: background-color 0.2s ease;
+}
+
+.leaderboard-entry:hover {
+  background-color: rgba(138, 154, 123, 0.1);
+}
+
+.leaderboard-entry:first-child {
+  background-color: rgba(201, 169, 97, 0.15);
+  font-weight: 600;
+}
+
+.leaderboard-entry:first-child .rank::before {
+  content: '🥇 ';
+}
+
+.leaderboard-entry:nth-child(2) .rank::before {
+  content: '🥈 ';
+}
+
+.leaderboard-entry:nth-child(3) .rank::before {
+  content: '🥉 ';
+}
+
+.rank {
+  min-width: 2.5rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.name {
+  flex: 1;
+  color: var(--dark-wood);
+}
+
+.score-value {
+  font-weight: 600;
+  color: var(--sage-dark);
+  min-width: 3rem;
+  text-align: right;
+}
+
+.leaderboard-loading,
+.leaderboard-empty {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Name Input Modal */
+.name-input-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  border-radius: 12px;
+}
+
+.name-input-modal {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 300px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.name-input-modal h3 {
+  color: var(--sage-dark);
+  margin: 0 0 1rem 0;
+}
+
+.score-display {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--dark-wood);
+  margin: 0 0 1.5rem 0;
+}
+
+.name-input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 2px solid var(--sage-green);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.name-input:focus {
+  outline: none;
+  border-color: var(--sage-dark);
+}
+
+.name-input-buttons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.submit-btn,
+.skip-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submit-btn {
+  background-color: var(--sage-green);
+  color: white;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: var(--sage-dark);
+  transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.skip-btn {
+  background-color: var(--text-light);
+  color: white;
+}
+
+.skip-btn:hover {
+  background-color: var(--text-secondary);
 }
 </style>
