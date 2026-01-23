@@ -1,8 +1,21 @@
 import { ref } from 'vue'
+import { captureError } from '@/config/sentry'
 
-const CORRECT_PASSWORD = 'SaturdaysInLincolnPark'
+const CORRECT_PASSWORD = import.meta.env.VITE_SITE_PASSWORD || ''
 const AUTH_COOKIE_NAME = 'wedding_auth'
 const COOKIE_EXPIRY_DAYS = 30
+
+// Warn if password is not configured
+if (!import.meta.env.VITE_SITE_PASSWORD) {
+  const errorMessage = 'VITE_SITE_PASSWORD environment variable is not set. Authentication will not work properly.'
+  console.warn(errorMessage)
+
+  // Capture in Sentry for production monitoring
+  captureError(new Error(errorMessage), {
+    environment: import.meta.env.MODE,
+    missingVariable: 'VITE_SITE_PASSWORD',
+  })
+}
 
 // Reactive authentication state
 const isAuthenticated = ref(false)
@@ -37,9 +50,9 @@ export function checkAuth(): boolean {
   return isAuthenticated.value
 }
 
-// Verify password and set authentication
+// Verify password and set authentication (case-insensitive)
 export function login(password: string): boolean {
-  if (password === CORRECT_PASSWORD) {
+  if (password.toLowerCase() === CORRECT_PASSWORD.toLowerCase()) {
     isAuthenticated.value = true
     setCookie(AUTH_COOKIE_NAME, 'true', COOKIE_EXPIRY_DAYS)
     return true
