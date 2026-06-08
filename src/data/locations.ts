@@ -45,6 +45,7 @@ export interface Event {
   venue: string
   address: string
   description: string
+  image: string
   lat: number
   lng: number
 }
@@ -355,6 +356,7 @@ export const EVENTS: Event[] = [
     venue: 'Cafe Ba-Ba-Reeba!',
     address: '2404 N Halsted St, Chicago, IL 60614',
     description: 'Join us for tapas and drinks to kick off the weekend!',
+    image: '/images/schedule/babareeba.jpg',
     lat: 41.9265,
     lng: -87.6489,
   },
@@ -367,6 +369,7 @@ export const EVENTS: Event[] = [
     venue: 'Cafe Brauer',
     address: '2021 N Stockton Dr, Chicago, IL 60614',
     description: 'Our ceremony and reception in beautiful Lincoln Park.',
+    image: '/images/schedule/cafebrauer.jpg',
     lat: 41.9204,
     lng: -87.6341,
   },
@@ -379,6 +382,7 @@ export const EVENTS: Event[] = [
     venue: "Ranalli's Pizza Bar",
     address: '1925 N Lincoln Ave, Chicago, IL 60614',
     description: 'Keep the party going with late-night pizza!',
+    image: '/images/schedule/ranallis.jpg',
     lat: 41.9204,
     lng: -87.6497,
   },

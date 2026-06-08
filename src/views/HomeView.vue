@@ -29,7 +29,8 @@ onMounted(() => {
       if (isMobile()) {
         toastMessage.value = '🎮 Try visiting on desktop to see all the easter eggs the site has!'
       } else {
-        toastMessage.value = "🎮 There's a game hidden in the site, try and find the easter egg that reveals it!"
+        toastMessage.value =
+          "🎮 There's a game hidden in the site, try and find the easter egg that reveals it!"
       }
       showToast.value = true
       sessionStorage.setItem('easterEggToastShown', 'true')
@@ -46,24 +47,32 @@ const triggerTestError = () => {
   const hasDsn = !!import.meta.env.VITE_SENTRY_DSN
 
   if (!isProduction) {
-    alert('⚠️ Sentry is disabled in development mode.\n\nTo test Sentry:\n1. Set up your Sentry DSN (see MONITORING.md)\n2. Build and deploy to production\n3. Visit your production site with ?showTestErrorButton=true')
+    alert(
+      '⚠️ Sentry is disabled in development mode.\n\nTo test Sentry:\n1. Set up your Sentry DSN (see MONITORING.md)\n2. Build and deploy to production\n3. Visit your production site with ?showTestErrorButton=true',
+    )
     return
   }
 
   if (!hasDsn) {
-    alert('⚠️ Sentry DSN is not configured.\n\nPlease add VITE_SENTRY_DSN to your GitHub secrets.\nSee MONITORING.md for setup instructions.')
+    alert(
+      '⚠️ Sentry DSN is not configured.\n\nPlease add VITE_SENTRY_DSN to your GitHub secrets.\nSee MONITORING.md for setup instructions.',
+    )
     return
   }
 
   try {
-    throw new Error('Test Error: Sentry monitoring is working! This is a test error triggered manually.')
+    throw new Error(
+      'Test Error: Sentry monitoring is working! This is a test error triggered manually.',
+    )
   } catch (error) {
     captureError(error as Error, {
       source: 'test-button',
       page: 'home',
       timestamp: new Date().toISOString(),
     })
-    alert('✅ Test error sent to Sentry!\n\nCheck your Sentry dashboard at:\nhttps://sentry.io\n\nIt may take a few moments to appear.')
+    alert(
+      '✅ Test error sent to Sentry!\n\nCheck your Sentry dashboard at:\nhttps://sentry.io\n\nIt may take a few moments to appear.',
+    )
   }
 }
 </script>
@@ -77,10 +86,13 @@ const triggerTestError = () => {
         <div class="hero-divider"></div>
         <p class="hero-date">October 17th, 2026</p>
         <p class="hero-venue">Cafe Brauer · Lincoln Park · Chicago</p>
-        <p class="hero-invitation">Invitation to follow</p>
-        <!-- <div class="hero-cta">
-          <RouterLink to="/rsvp" class="btn btn-primary">RSVP Now</RouterLink>
-        </div> -->
+        <div class="hero-new-sections">
+          <p class="hero-new-label">Now available</p>
+          <div class="hero-cta">
+            <RouterLink to="/registry" class="btn btn-hero">View Registry</RouterLink>
+            <RouterLink to="/faq" class="btn btn-hero-outline">FAQ</RouterLink>
+          </div>
+        </div>
       </div>
       <div class="hero-scroll-indicator">
         <span style="color: white">Scroll to explore</span>
@@ -116,14 +128,14 @@ const triggerTestError = () => {
             <h3>Visit Chicago</h3>
             <p>Explore our beautiful city</p>
           </RouterLink>
-          <!-- <RouterLink to="/registry" class="link-card">
+          <RouterLink to="/registry" class="link-card">
             <h3>Registry</h3>
             <p>View our wedding registry</p>
-          </RouterLink> -->
-          <!-- <RouterLink to="/faq" class="link-card">
+          </RouterLink>
+          <RouterLink to="/faq" class="link-card">
             <h3>FAQ</h3>
             <p>Find answers to common questions</p>
-          </RouterLink> -->
+          </RouterLink>
         </div>
       </div>
     </section>
@@ -131,9 +143,7 @@ const triggerTestError = () => {
     <!-- Test Error Button (only visible with query param) -->
     <section v-if="showTestButton" class="test-section">
       <div class="container">
-        <button @click="triggerTestError" class="test-error-btn">
-          Test Sentry Error Tracking
-        </button>
+        <button @click="triggerTestError" class="test-error-btn">Test Sentry Error Tracking</button>
       </div>
     </section>
 
@@ -228,17 +238,69 @@ const triggerTestError = () => {
   margin-bottom: 1rem;
 }
 
-.hero-invitation {
-  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-  font-family: 'Georgia', serif;
+.hero-new-sections {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.hero-new-label {
+  font-size: 0.9rem;
+  font-family: 'Helvetica Neue', sans-serif;
   color: var(--cream);
-  opacity: 0.85;
-  font-style: italic;
-  margin-bottom: 3rem;
+  opacity: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin: 0;
+  font-weight: 600;
 }
 
 .hero-cta {
-  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-hero,
+.btn-hero-outline {
+  width: 160px;
+  text-align: center;
+  padding: 0.75rem 0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  color: var(--cream);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.btn-hero {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+}
+
+.btn-hero:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-color: white;
+}
+
+.btn-hero-outline {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-hero-outline:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .hero-scroll-indicator {

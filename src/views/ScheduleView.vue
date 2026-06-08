@@ -169,6 +169,8 @@ onMounted(() => {
     subtitle="Join us for a weekend of celebration"
     gradient-from="var(--sapphire-blue)"
     gradient-to="var(--emerald-green)"
+    background-image="/images/header-schedule.jpg"
+    background-position="center 40%"
   >
     <section class="schedule-section">
       <div class="schedule-container" :class="{ 'mobile-map-active': showMapMobile }">
@@ -183,12 +185,12 @@ onMounted(() => {
             @mouseleave="handleEventHover(null)"
             @click="selectedEvent = event.id"
           >
-            <div class="event-date">
-              <div class="day">{{ event.day }}</div>
-              <div class="date">{{ event.date }}</div>
+            <div class="event-image">
+              <img :src="event.image" :alt="event.venue" />
             </div>
             <div class="event-details">
               <h3 class="event-name">{{ event.name }}</h3>
+              <div class="event-date-line">{{ event.day }}, {{ event.date }}</div>
               <div class="event-time">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -266,7 +268,7 @@ onMounted(() => {
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 2fr;
   gap: 3rem;
   align-items: start;
 }
@@ -297,26 +299,27 @@ onMounted(() => {
   border-color: var(--sage-green);
 }
 
-.event-date {
-  text-align: center;
-  padding: 1rem;
-  background-color: var(--cream);
+.event-image {
+  flex-shrink: 0;
   border-radius: 8px;
-  min-width: 120px;
+  overflow: hidden;
+  max-width: 200px;
+  align-self: center;
 }
 
-.day {
-  font-size: 0.9rem;
-  font-weight: 600;
+.event-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.event-date-line {
+  font-size: 0.85rem;
   color: var(--sage-dark);
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
-}
-
-.date {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  margin-top: -0.25rem;
 }
 
 .event-details {
@@ -450,8 +453,8 @@ onMounted(() => {
     padding: 1.5rem;
   }
 
-  .event-date {
-    min-width: auto;
+  .event-image {
+    max-width: 100%;
   }
 
   .event-name {

@@ -468,7 +468,9 @@ onUnmounted(() => {
       <div v-if="showLeaderboard" class="leaderboard-section">
         <h3>🏆 Top Scores</h3>
         <div v-if="leaderboardLoading" class="leaderboard-loading">Loading...</div>
-        <div v-else-if="scores.length === 0" class="leaderboard-empty">No scores yet. Be the first!</div>
+        <div v-else-if="scores.length === 0" class="leaderboard-empty">
+          No scores yet. Be the first!
+        </div>
         <ol v-else class="leaderboard">
           <li v-for="(entry, index) in scores" :key="entry.id" class="leaderboard-entry">
             <span class="rank">{{ index + 1 }}.</span>
@@ -492,7 +494,11 @@ onUnmounted(() => {
             @keydown.enter="handleSubmitScore"
           />
           <div class="name-input-buttons">
-            <button @click="handleSubmitScore" :disabled="!playerName.trim() || submitting" class="submit-btn">
+            <button
+              @click="handleSubmitScore"
+              :disabled="!playerName.trim() || submitting"
+              class="submit-btn"
+            >
               {{ submitting ? 'Submitting...' : 'Submit' }}
             </button>
             <button @click="skipSubmit" class="skip-btn">Skip</button>

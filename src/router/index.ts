@@ -41,16 +41,16 @@ const router = createRouter({
     //   name: 'rsvp',
     //   component: RsvpView,
     // },
-    // {
-    //   path: '/registry',
-    //   name: 'registry',
-    //   component: RegistryView,
-    // },
-    // {
-    //   path: '/faq',
-    //   name: 'faq',
-    //   component: AboutView,
-    // },
+    {
+      path: '/registry',
+      name: 'registry',
+      component: RegistryView,
+    },
+    {
+      path: '/faq',
+      name: 'faq',
+      component: AboutView,
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     // If navigating to a hash (anchor link), scroll to that element

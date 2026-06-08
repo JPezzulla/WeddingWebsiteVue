@@ -39,7 +39,10 @@ export function useLeaderboard() {
       }
 
       // Sanitize name (max 20 chars, no special chars)
-      const sanitizedName = name.trim().slice(0, 20).replace(/[^\w\s-]/g, '')
+      const sanitizedName = name
+        .trim()
+        .slice(0, 20)
+        .replace(/[^\w\s-]/g, '')
 
       await addDoc(collection(db, 'snakeScores'), {
         name: sanitizedName,

@@ -2,8 +2,9 @@
 import PageLayout from '../components/PageLayout.vue'
 import ContentCard from '../components/ContentCard.vue'
 
-// You'll replace this URL with your actual Zola Registry URL
 const zolaRegistryUrl = 'https://www.zola.com/wedding/kaitlynandjoseph2026/registry'
+const surLaTableRegistryUrl =
+  'https://www.surlatable.com/registry/2002640469344/joe-pezzulla-and-kaitlyn-kauffman'
 </script>
 
 <template>
@@ -11,6 +12,8 @@ const zolaRegistryUrl = 'https://www.zola.com/wedding/kaitlynandjoseph2026/regis
     title="Registry"
     subtitle="Your presence is the greatest gift"
     gradient-from="var(--emerald-green)"
+    background-image="/images/header-registry.jpg"
+    background-position="center 20%"
     gradient-to="var(--sage-dark)"
   >
     <!-- Registry Content -->
@@ -39,24 +42,9 @@ const zolaRegistryUrl = 'https://www.zola.com/wedding/kaitlynandjoseph2026/regis
 
       <p class="registry-description">
         Your love and support mean the world to us. If you'd like to give a gift, we've registered
-        with Zola to make it easy. We're grateful for anything you choose to give, or simply for
-        sharing in our joy on our wedding day.
+        with Zola and Sur La Table to make it easy. We're grateful for anything you choose to give,
+        or simply for sharing in our joy on our wedding day.
       </p>
-
-      <div class="registry-features">
-        <div class="feature">
-          <h3>Traditional Gifts</h3>
-          <p>Home goods and essentials to start our life together</p>
-        </div>
-        <div class="feature">
-          <h3>Experiences</h3>
-          <p>Help us create memories on our honeymoon</p>
-        </div>
-        <div class="feature">
-          <h3>Cash Funds</h3>
-          <p>Contributions toward our future home and adventures</p>
-        </div>
-      </div>
 
       <div class="registry-cta">
         <a
@@ -83,26 +71,40 @@ const zolaRegistryUrl = 'https://www.zola.com/wedding/kaitlynandjoseph2026/regis
             <line x1="10" y1="14" x2="21" y2="3" />
           </svg>
         </a>
+        <a
+          :href="surLaTableRegistryUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-gold"
+        >
+          View Our Sur La Table Registry
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="margin-left: 0.5rem"
+          >
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+        </a>
       </div>
 
       <p class="registry-note">
-        Clicking the button above will take you to our Zola registry page where you can browse and
+        Clicking either button above will take you to our registry page where you can browse and
         purchase gifts.
       </p>
     </ContentCard>
 
     <!-- Quote Section -->
-    <section class="quote-section">
-      <div class="container text-center">
-        <blockquote class="registry-quote">
-          <p>
-            "The greatest gift you can give us is your presence, but if you're feeling generous,
-            we've created a registry to help us build our home together."
-          </p>
-          <cite>— Joseph & Kaitlyn</cite>
-        </blockquote>
-      </div>
-    </section>
+    <section class="quote-section"></section>
   </PageLayout>
 </template>
 
@@ -143,13 +145,19 @@ h2 {
 
 .registry-cta {
   margin: 3rem 0 2rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .registry-cta .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   font-size: 1.1rem;
-  padding: 1.25rem 3rem;
+  padding: 1.25rem 2rem;
+  min-width: 320px;
 }
 
 .registry-note {
@@ -185,6 +193,29 @@ h2 {
 }
 
 @media (max-width: 768px) {
+  :deep(.content-card) {
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  :deep(.content-section) {
+    padding: 3rem 1.5rem;
+  }
+
+  .registry-cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .registry-cta .btn {
+    min-width: unset;
+    width: 100%;
+    max-width: 340px;
+  }
+
   .registry-features {
     grid-template-columns: 1fr;
     gap: 1.5rem;

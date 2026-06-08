@@ -6,6 +6,7 @@ import InfoSection from '../components/InfoSection.vue'
 interface FAQ {
   question: string
   answer: string
+  answerHtml?: string
   open: boolean
 }
 
@@ -13,7 +14,7 @@ const faqs = ref<FAQ[]>([
   {
     question: 'What is the dress code?',
     answer:
-      "We've chosen to go with Black tie optional to give our friends and family the chance to dress up as fancy as they'd like. Please do not feel obligated to rent a tux or pull out a gown, cocktail attire is entirely welcome!",
+      "We've chosen to go with Black tie optional to give our friends and family the chance to dress up as fancy as they'd like. Please do not feel obligated to rent a tux or pull out a gown!",
     open: false,
   },
   {
@@ -23,21 +24,34 @@ const faqs = ref<FAQ[]>([
     open: false,
   },
   {
-    question: 'Can I bring a plus-one?',
-    answer:
-      'Due to venue capacity, we are only able to accommodate guests formally invited on your invitation. If you received a plus-one, it will be indicated on your invitation. Please reach out to us directly if you have questions.',
+    question: 'Will there be a shuttle from the venue?',
+    answer: '',
+    answerHtml: `
+      <p>Yes! We will have a charter bus running on a loop to all of the hotels and the venue, with the first shuttle leaving from the voco hotel at 3:00pm.</p>
+      <div style="overflow-x: auto"><table class="shuttle-table">
+        <thead>
+          <tr><th>Location</th><th>Departure 1</th><th>Departure 2</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>voco Chicago Downtown</td><td>3:00 PM</td><td>4:00 PM</td></tr>
+          <tr><td>The Viceroy</td><td>3:20 PM</td><td>4:20 PM</td></tr>
+          <tr><td>Hotel Lincoln</td><td>3:30 PM</td><td>4:30 PM</td></tr>
+          <tr><td>Cafe Brauer</td><td>3:45 PM</td><td>4:45 PM</td></tr>
+        </tbody>
+      </table></div>
+    `,
     open: false,
   },
   {
-    question: 'Are children welcome?',
+    question: 'Can I bring a plus-one?',
     answer:
-      "While we love your little ones, we've decided to make our wedding an adults-only celebration. We hope this gives you a chance to relax and enjoy the evening!",
+      'Due to venue capacity, we are only able to accommodate guests formally included in your rsvp. Please reach out to us directly if you have questions.',
     open: false,
   },
   {
     question: 'What time should I arrive?',
     answer:
-      'The ceremony begins promptly at 6:00 PM. We recommend arriving 15-20 minutes early to find parking and get settled. The reception will follow immediately after the ceremony.',
+      'We ask that you arrive by 4:45 at the latest to find parking and get settled. The ceremony begins promptly at 5:00 PM. The reception will immediately follow after the ceremony.',
     open: false,
   },
   {
@@ -55,7 +69,7 @@ const faqs = ref<FAQ[]>([
   {
     question: 'Can I take photos during the ceremony?',
     answer:
-      "We're having an unplugged ceremony, which means we kindly ask that you keep your phones and cameras put away during the ceremony. Our professional photographer will capture all the special moments. Feel free to take as many photos as you'd like during the reception!",
+      "We kindly ask that you keep your phones and cameras put away during the ceremony. Our professional photographer will capture all the special moments. Feel free to take as many photos as you'd like during the reception!",
     open: false,
   },
   {
@@ -67,13 +81,7 @@ const faqs = ref<FAQ[]>([
   {
     question: 'When is the RSVP deadline?',
     answer:
-      'Please respond by May 1, 2025. This helps us finalize our headcount with the venue and caterer. You can RSVP through our Zola page.',
-    open: false,
-  },
-  {
-    question: 'What if I have dietary restrictions?',
-    answer:
-      'Please let us know about any dietary restrictions or allergies when you RSVP. We want to make sure everyone has delicious food to enjoy!',
+      'Please respond by August 17. This helps us finalize our headcount with the venue and caterer. You can RSVP through our RSVP tab.',
     open: false,
   },
 ])
@@ -89,6 +97,7 @@ const toggleFaq = (index: number) => {
     subtitle="Everything you need to know about our big day"
     gradient-from="var(--amethyst)"
     gradient-to="var(--ruby-red)"
+    background-image="/images/joe-and-kait/Kauffman-Pezzulla-E-0024.jpg"
   >
     <!-- FAQ Content -->
     <InfoSection title="">
@@ -118,7 +127,8 @@ const toggleFaq = (index: number) => {
               </svg>
             </button>
             <div class="faq-answer">
-              <p>{{ faq.answer }}</p>
+              <div v-if="faq.answerHtml" class="faq-answer-html" v-html="faq.answerHtml" />
+              <p v-else>{{ faq.answer }}</p>
             </div>
           </div>
         </div>
@@ -133,8 +143,12 @@ const toggleFaq = (index: number) => {
           to help!
         </p>
         <p style="margin: 0 auto">
-          <strong>Email:</strong>
-          <a href="mailto:contact@example.com" class="email-link">contact@example.com</a>
+          <strong>Kait's Number:</strong>
+          <div class="email-link">(312)-270-5843</div>
+        </p>
+        <p style="margin: 0 auto">
+          <strong>Joe's Number:</strong>
+          <div class="email-link">(443)-823-9021</div>
         </p>
       </div>
     </InfoSection>
@@ -202,7 +216,7 @@ const toggleFaq = (index: number) => {
 }
 
 .faq-item.open .faq-answer {
-  max-height: 500px;
+  max-height: 600px;
 }
 
 .faq-answer p {
@@ -210,6 +224,53 @@ const toggleFaq = (index: number) => {
   margin: 0;
   color: var(--text-secondary);
   line-height: 1.8;
+}
+
+.faq-answer-html {
+  padding: 1rem 2rem 1.5rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+:deep(.faq-answer-html p) {
+  margin: 0 0 1rem;
+}
+
+:deep(.shuttle-table) {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+:deep(.shuttle-table th) {
+  text-align: left;
+  padding: 0.6rem 1rem;
+  background-color: var(--sage-green);
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+:deep(.shuttle-table th:first-child) {
+  border-radius: 6px 0 0 0;
+}
+
+:deep(.shuttle-table th:last-child) {
+  border-radius: 0 6px 0 0;
+}
+
+:deep(.shuttle-table td) {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+:deep(.shuttle-table tbody tr:last-child td) {
+  border-bottom: none;
+}
+
+:deep(.shuttle-table tbody tr:nth-child(even)) {
+  background-color: var(--cream);
 }
 
 .contact-content {
@@ -222,10 +283,6 @@ const toggleFaq = (index: number) => {
   margin-left: 0.5rem;
 }
 
-.email-link:hover {
-  text-decoration: underline;
-}
-
 @media (max-width: 768px) {
   .faq-question {
     padding: 1.25rem 1.5rem;
@@ -234,6 +291,19 @@ const toggleFaq = (index: number) => {
 
   .faq-answer p {
     padding: 0.75rem 1.5rem 1.25rem;
+  }
+
+  .faq-answer-html {
+    padding: 0.75rem 1.5rem 1.25rem;
+  }
+
+  :deep(.shuttle-table) {
+    font-size: 0.85rem;
+  }
+
+  :deep(.shuttle-table th),
+  :deep(.shuttle-table td) {
+    padding: 0.5rem 0.6rem;
   }
 }
 </style>

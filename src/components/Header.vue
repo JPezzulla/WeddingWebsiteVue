@@ -58,17 +58,20 @@ onUnmounted(() => {
       <!-- Desktop Nav -->
       <nav class="nav desktop-nav">
         <RouterLink class="nav-link" exact-active-class="active" to="/">Home</RouterLink>
+        <RouterLink class="nav-link" exact-active-class="active" to="/schedule"
+          >Schedule</RouterLink
+        >
+        <RouterLink class="nav-link" exact-active-class="active" to="/chicago">Chicago</RouterLink>
         <RouterLink class="nav-link" exact-active-class="active" to="/us">Our Story</RouterLink>
         <RouterLink class="nav-link" exact-active-class="active" to="/party"
           >Wedding Party</RouterLink
         >
-        <RouterLink class="nav-link" exact-active-class="active" to="/chicago">Chicago</RouterLink>
-        <RouterLink class="nav-link" exact-active-class="active" to="/schedule"
-          >Schedule</RouterLink
+        <RouterLink class="nav-link" exact-active-class="active" to="/registry"
+          >Registry <span class="new-badge">New</span></RouterLink
         >
-        <!-- <RouterLink class="nav-link" exact-active-class="active" to="/rsvp">RSVP</RouterLink> -->
-        <!-- <RouterLink class="nav-link" exact-active-class="active" to="/registry">Registry</RouterLink> -->
-        <!-- <RouterLink class="nav-link" exact-active-class="active" to="/faq">FAQ</RouterLink> -->
+        <RouterLink class="nav-link" exact-active-class="active" to="/faq"
+          >FAQ <span class="new-badge">New</span></RouterLink
+        >
       </nav>
     </div>
 
@@ -80,6 +83,20 @@ onUnmounted(() => {
         to="/"
         @click="closeMobileMenu"
         >Home</RouterLink
+      >
+      <RouterLink
+        class="mobile-nav-link"
+        exact-active-class="active"
+        to="/schedule"
+        @click="closeMobileMenu"
+        >Schedule</RouterLink
+      >
+      <RouterLink
+        class="mobile-nav-link"
+        exact-active-class="active"
+        to="/chicago"
+        @click="closeMobileMenu"
+        >Chicago</RouterLink
       >
       <RouterLink
         class="mobile-nav-link"
@@ -98,38 +115,17 @@ onUnmounted(() => {
       <RouterLink
         class="mobile-nav-link"
         exact-active-class="active"
-        to="/chicago"
-        @click="closeMobileMenu"
-        >Chicago</RouterLink
-      >
-      <RouterLink
-        class="mobile-nav-link"
-        exact-active-class="active"
-        to="/schedule"
-        @click="closeMobileMenu"
-        >Schedule</RouterLink
-      >
-      <!--<RouterLink
-        class="mobile-nav-link"
-        exact-active-class="active"
-        to="/rsvp"
-        @click="closeMobileMenu"
-        >RSVP</RouterLink
-      >-->
-      <!--<RouterLink
-        class="mobile-nav-link"
-        exact-active-class="active"
         to="/registry"
         @click="closeMobileMenu"
-        >Registry</RouterLink
+        >Registry <span class="new-badge">New</span></RouterLink
       >
       <RouterLink
         class="mobile-nav-link"
         exact-active-class="active"
         to="/faq"
         @click="closeMobileMenu"
-        >FAQ</RouterLink
-      > -->
+        >FAQ <span class="new-badge">New</span></RouterLink
+      >
     </nav>
   </header>
 
@@ -351,6 +347,21 @@ onUnmounted(() => {
 /* Desktop Nav - hidden on mobile */
 .desktop-nav {
   display: flex;
+}
+
+.new-badge {
+  display: inline-block;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: var(--sage-dark);
+  color: var(--cream);
+  padding: 0.08rem 0.25rem;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-left: 0.15rem;
+  line-height: 1.3;
 }
 
 /* Mobile responsive */

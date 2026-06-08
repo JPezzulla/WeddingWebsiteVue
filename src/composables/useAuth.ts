@@ -7,7 +7,8 @@ const COOKIE_EXPIRY_DAYS = 30
 
 // Warn if password is not configured
 if (!import.meta.env.VITE_SITE_PASSWORD) {
-  const errorMessage = 'VITE_SITE_PASSWORD environment variable is not set. Authentication will not work properly.'
+  const errorMessage =
+    'VITE_SITE_PASSWORD environment variable is not set. Authentication will not work properly.'
   console.warn(errorMessage)
 
   // Capture in Sentry for production monitoring

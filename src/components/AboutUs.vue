@@ -207,7 +207,7 @@ import StickySection from './StickySection.vue'
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/images/joe-and-kait/Kauffman-Pezzulla-E-0024.jpg');
+  background-image: url('/images/header-faq.jpg');
   background-position: 5% center;
   background-size: cover;
   background-repeat: no-repeat;
