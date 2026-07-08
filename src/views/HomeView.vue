@@ -86,8 +86,14 @@ const triggerTestError = () => {
         <div class="hero-divider"></div>
         <p class="hero-date">October 17th, 2026</p>
         <p class="hero-venue">Cafe Brauer · Lincoln Park · Chicago</p>
+        <div class="hero-cta-primary">
+          <RouterLink to="/rsvp" class="btn-hero-primary">
+            RSVP Now
+            <span class="hero-cta-badge">New</span>
+          </RouterLink>
+        </div>
         <div class="hero-new-sections">
-          <p class="hero-new-label">Now available</p>
+          <p class="hero-new-label">Also new</p>
           <div class="hero-cta">
             <RouterLink to="/registry" class="btn btn-hero">View Registry</RouterLink>
             <RouterLink to="/faq" class="btn btn-hero-outline">FAQ</RouterLink>
@@ -182,7 +188,7 @@ const triggerTestError = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/images/joe-and-kait/Kauffman-Pezzulla-E-0001.jpg');
+  background-image: url('/images/joe-and-kait/Kauffman-Pezzulla-E-0001.webp');
   background-position: center 30%;
   background-size: cover;
   opacity: 0.3;
@@ -238,12 +244,53 @@ const triggerTestError = () => {
   margin-bottom: 1rem;
 }
 
+.hero-cta-primary {
+  margin-top: 2rem;
+}
+
+.btn-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.1rem 2.75rem;
+  border-radius: 4px;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--dark-wood);
+  background-color: var(--gold-light);
+  border: 2px solid var(--gold-light);
+  box-shadow: 0 8px 24px rgba(229, 212, 166, 0.5);
+  transition: all 0.3s ease;
+}
+
+.btn-hero-primary:hover {
+  background-color: var(--gold);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(201, 169, 97, 0.55);
+}
+
+.hero-cta-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: var(--ruby-red);
+  color: var(--cream);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+}
+
 .hero-new-sections {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   margin-bottom: 2rem;
   width: 100%;
 }
@@ -357,7 +404,7 @@ const triggerTestError = () => {
 
 .links-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;

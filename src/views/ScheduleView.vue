@@ -169,7 +169,7 @@ onMounted(() => {
     subtitle="Join us for a weekend of celebration"
     gradient-from="var(--sapphire-blue)"
     gradient-to="var(--emerald-green)"
-    background-image="/images/header-schedule.jpg"
+    background-image="/images/header-schedule.webp"
     background-position="center 40%"
   >
     <section class="schedule-section">
@@ -186,7 +186,7 @@ onMounted(() => {
             @click="selectedEvent = event.id"
           >
             <div class="event-image">
-              <img :src="event.image" :alt="event.venue" />
+              <img :src="event.image" :alt="event.venue" loading="lazy" decoding="async" />
             </div>
             <div class="event-details">
               <h3 class="event-name">{{ event.name }}</h3>

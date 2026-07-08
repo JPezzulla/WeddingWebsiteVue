@@ -12,7 +12,7 @@ const surLaTableRegistryUrl =
     title="Registry"
     subtitle="Your presence is the greatest gift"
     gradient-from="var(--emerald-green)"
-    background-image="/images/header-registry.jpg"
+    background-image="/images/header-registry.webp"
     background-position="center 20%"
     gradient-to="var(--sage-dark)"
   >
@@ -39,6 +39,11 @@ const surLaTableRegistryUrl =
       </template>
 
       <h2>Thank You for Celebrating With Us</h2>
+
+      <p class="registry-subheader">
+        Your presence is present enough, we care the most about celebrating with the people we
+        love.
+      </p>
 
       <p class="registry-description">
         Your love and support mean the world to us. If you'd like to give a gift, we've registered
@@ -102,9 +107,6 @@ const surLaTableRegistryUrl =
         purchase gifts.
       </p>
     </ContentCard>
-
-    <!-- Quote Section -->
-    <section class="quote-section"></section>
   </PageLayout>
 </template>
 
@@ -112,6 +114,15 @@ const surLaTableRegistryUrl =
 h2 {
   margin-bottom: 2rem;
   color: var(--dark-wood);
+}
+
+.registry-subheader {
+  margin: 0 auto 2rem;
+  max-width: 600px;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-style: italic;
+  color: var(--sage-dark);
+  line-height: 1.6;
 }
 
 .registry-description {
@@ -165,31 +176,6 @@ h2 {
   font-size: 0.9rem;
   color: var(--text-light);
   font-style: italic;
-}
-
-.quote-section {
-  padding: 6rem 2rem;
-  background-color: #fff;
-}
-
-.registry-quote {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.registry-quote p {
-  font-size: clamp(1.2rem, 3vw, 1.8rem);
-  font-style: italic;
-  color: var(--text-primary);
-  line-height: 1.6;
-  margin: 0 auto 2rem;
-}
-
-.registry-quote cite {
-  font-family: 'Georgia', serif;
-  font-size: 1.1rem;
-  font-style: normal;
-  color: var(--sage-dark);
 }
 
 @media (max-width: 768px) {

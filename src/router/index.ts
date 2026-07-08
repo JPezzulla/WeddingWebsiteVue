@@ -36,11 +36,11 @@ const router = createRouter({
       name: 'schedule',
       component: ScheduleView,
     },
-    // {
-    //   path: '/rsvp',
-    //   name: 'rsvp',
-    //   component: RsvpView,
-    // },
+    {
+      path: '/rsvp',
+      name: 'rsvp',
+      component: RsvpView,
+    },
     {
       path: '/registry',
       name: 'registry',

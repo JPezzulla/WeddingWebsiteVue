@@ -1,7 +1,10 @@
 import { ref } from 'vue'
 import { captureError } from '@/config/sentry'
 
-const CORRECT_PASSWORD = import.meta.env.VITE_SITE_PASSWORD || ''
+const CORRECT_PASSWORDS = [
+  import.meta.env.VITE_SITE_PASSWORD || '',
+  import.meta.env.VITE_SITE_PASSWORD_ALT || '',
+].filter(Boolean)
 const AUTH_COOKIE_NAME = 'wedding_auth'
 const COOKIE_EXPIRY_DAYS = 30
 
@@ -53,7 +56,8 @@ export function checkAuth(): boolean {
 
 // Verify password and set authentication (case-insensitive)
 export function login(password: string): boolean {
-  if (password.toLowerCase() === CORRECT_PASSWORD.toLowerCase()) {
+  const normalized = password.toLowerCase()
+  if (CORRECT_PASSWORDS.some((correct) => normalized === correct.toLowerCase())) {
     isAuthenticated.value = true
     setCookie(AUTH_COOKIE_NAME, 'true', COOKIE_EXPIRY_DAYS)
     return true

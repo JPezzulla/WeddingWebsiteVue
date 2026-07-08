@@ -210,7 +210,7 @@ onMounted(() => {
     title="Explore Chicago"
     gradient-from="var(--sapphire-blue)"
     gradient-to="var(--amethyst)"
-    background-image="/images/joe-and-kait/Kauffman-Pezzulla-E-0023.jpg"
+    background-image="/images/joe-and-kait/Kauffman-Pezzulla-E-0023.webp"
     background-position="center 47%"
     background-size="cover"
   >

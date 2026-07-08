@@ -66,6 +66,9 @@ onUnmounted(() => {
         <RouterLink class="nav-link" exact-active-class="active" to="/party"
           >Wedding Party</RouterLink
         >
+        <RouterLink class="nav-link" exact-active-class="active" to="/rsvp"
+          >RSVP <span class="new-badge">New</span></RouterLink
+        >
         <RouterLink class="nav-link" exact-active-class="active" to="/registry"
           >Registry <span class="new-badge">New</span></RouterLink
         >
@@ -111,6 +114,13 @@ onUnmounted(() => {
         to="/party"
         @click="closeMobileMenu"
         >Wedding Party</RouterLink
+      >
+      <RouterLink
+        class="mobile-nav-link"
+        exact-active-class="active"
+        to="/rsvp"
+        @click="closeMobileMenu"
+        >RSVP <span class="new-badge">New</span></RouterLink
       >
       <RouterLink
         class="mobile-nav-link"

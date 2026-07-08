@@ -28,7 +28,7 @@ const faqs = ref<FAQ[]>([
     answer: '',
     answerHtml: `
       <p>Yes! We will have a charter bus running on a loop to all of the hotels and the venue, with the first shuttle leaving from the voco hotel at 3:00pm.</p>
-      <div style="overflow-x: auto"><table class="shuttle-table">
+      <div class="shuttle-table-wrap"><table class="shuttle-table">
         <thead>
           <tr><th>Location</th><th>Departure 1</th><th>Departure 2</th></tr>
         </thead>
@@ -39,6 +39,46 @@ const faqs = ref<FAQ[]>([
           <tr><td>Cafe Brauer</td><td>3:45 PM</td><td>4:45 PM</td></tr>
         </tbody>
       </table></div>
+      <div class="shuttle-cards">
+        <div class="shuttle-card">
+          <div class="shuttle-card-location">voco Chicago Downtown</div>
+          <div class="shuttle-card-time"><span class="shuttle-card-label">Departure 1</span><span>3:00 PM</span></div>
+          <div class="shuttle-card-time"><span class="shuttle-card-label">Departure 2</span><span>4:00 PM</span></div>
+        </div>
+        <div class="shuttle-card">
+          <div class="shuttle-card-location">The Viceroy</div>
+          <div class="shuttle-card-time"><span class="shuttle-card-label">Departure 1</span><span>3:20 PM</span></div>
+          <div class="shuttle-card-time"><span class="shuttle-card-label">Departure 2</span><span>4:20 PM</span></div>
+        </div>
+        <div class="shuttle-card">
+          <div class="shuttle-card-location">Hotel Lincoln</div>
+          <div class="shuttle-card-time"><span class="shuttle-card-label">Departure 1</span><span>3:30 PM</span></div>
+          <div class="shuttle-card-time"><span class="shuttle-card-label">Departure 2</span><span>4:30 PM</span></div>
+        </div>
+        <div class="shuttle-card">
+          <div class="shuttle-card-location">Cafe Brauer</div>
+          <div class="shuttle-card-time"><span class="shuttle-card-label">Arrival 1</span><span>3:45 PM</span></div>
+          <div class="shuttle-card-time"><span class="shuttle-card-label">Arrival 2</span><span>4:45 PM</span></div>
+        </div>
+      </div>
+      <p class="shuttle-return-note">The shuttle will also make return trips from Cafe Brauer back to the hotels at the end of the night:</p>
+      <div class="shuttle-table-wrap"><table class="shuttle-table shuttle-return-table">
+        <thead>
+          <tr><th colspan="4">Return Trips from Cafe Brauer</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>9:00 PM</td><td>10:00 PM</td><td>11:00 PM</td><td>12:00 AM</td></tr>
+        </tbody>
+      </table></div>
+      <div class="shuttle-cards">
+        <div class="shuttle-card">
+          <div class="shuttle-card-location">Return Trips from Cafe Brauer</div>
+          <div class="shuttle-card-time"><span class="shuttle-card-label">Departure 1</span><span>9:00 PM</span></div>
+          <div class="shuttle-card-time"><span class="shuttle-card-label">Departure 2</span><span>10:00 PM</span></div>
+          <div class="shuttle-card-time"><span class="shuttle-card-label">Departure 3</span><span>11:00 PM</span></div>
+          <div class="shuttle-card-time"><span class="shuttle-card-label">Departure 4</span><span>12:00 AM</span></div>
+        </div>
+      </div>
     `,
     open: false,
   },
@@ -81,7 +121,7 @@ const faqs = ref<FAQ[]>([
   {
     question: 'When is the RSVP deadline?',
     answer:
-      'Please respond by August 17. This helps us finalize our headcount with the venue and caterer. You can RSVP through our RSVP tab.',
+      'Please respond by September 1. This helps us finalize our headcount with the venue and caterer. You can RSVP through our RSVP tab.',
     open: false,
   },
 ])
@@ -97,7 +137,7 @@ const toggleFaq = (index: number) => {
     subtitle="Everything you need to know about our big day"
     gradient-from="var(--amethyst)"
     gradient-to="var(--ruby-red)"
-    background-image="/images/joe-and-kait/Kauffman-Pezzulla-E-0024.jpg"
+    background-image="/images/joe-and-kait/Kauffman-Pezzulla-E-0024.webp"
   >
     <!-- FAQ Content -->
     <InfoSection title="">
@@ -110,7 +150,7 @@ const toggleFaq = (index: number) => {
             :class="{ open: faq.open }"
           >
             <button class="faq-question" @click="toggleFaq(index)">
-              <span>{{ faq.question }}</span>
+              <span class="faq-question-text">{{ faq.question }}</span>
               <svg
                 class="faq-icon"
                 xmlns="http://www.w3.org/2000/svg"
@@ -144,11 +184,11 @@ const toggleFaq = (index: number) => {
         </p>
         <p style="margin: 0 auto">
           <strong>Kait's Number:</strong>
-          <div class="email-link">(312)-270-5843</div>
+          <span class="email-link">(312)-270-5843</span>
         </p>
         <p style="margin: 0 auto">
           <strong>Joe's Number:</strong>
-          <div class="email-link">(443)-823-9021</div>
+          <span class="email-link">(443)-823-9021</span>
         </p>
       </div>
     </InfoSection>
@@ -156,11 +196,6 @@ const toggleFaq = (index: number) => {
 </template>
 
 <style scoped>
-.faq-container {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
 .faq-list {
   max-width: 900px;
   margin: 0 auto;
@@ -184,13 +219,13 @@ const toggleFaq = (index: number) => {
   padding: 1.5rem 2rem;
   background: none;
   border: none;
-  text-align: left;
   font-family: 'Georgia', serif;
   font-size: 1.2rem;
   color: var(--dark-wood);
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  column-gap: 0.75rem;
   align-items: center;
   transition: color 0.3s ease;
 }
@@ -199,7 +234,14 @@ const toggleFaq = (index: number) => {
   color: var(--sage-dark);
 }
 
+.faq-question-text {
+  grid-column: 1;
+  text-align: center;
+}
+
 .faq-icon {
+  grid-column: 2;
+  justify-self: end;
   flex-shrink: 0;
   transition: transform 0.3s ease;
   color: var(--sage-dark);
@@ -221,19 +263,30 @@ const toggleFaq = (index: number) => {
 
 .faq-answer p {
   padding: 1rem 2rem 1.5rem;
-  margin: 0;
+  margin: 0 auto;
   color: var(--text-secondary);
   line-height: 1.8;
+  text-align: center;
 }
 
 .faq-answer-html {
   padding: 1rem 2rem 1.5rem;
   color: var(--text-secondary);
   line-height: 1.8;
+  text-align: center;
+}
+
+:deep(.shuttle-table),
+:deep(.shuttle-table td) {
+  text-align: left;
 }
 
 :deep(.faq-answer-html p) {
-  margin: 0 0 1rem;
+  margin: 0 auto 1rem;
+}
+
+:deep(.shuttle-table-wrap) {
+  overflow-x: auto;
 }
 
 :deep(.shuttle-table) {
@@ -273,6 +326,53 @@ const toggleFaq = (index: number) => {
   background-color: var(--cream);
 }
 
+:deep(.shuttle-return-table th) {
+  text-align: center;
+  border-radius: 6px 6px 0 0;
+}
+
+:deep(.shuttle-return-table td) {
+  text-align: center;
+  font-weight: 600;
+  color: var(--dark-wood);
+}
+
+:deep(.shuttle-cards) {
+  display: none;
+}
+
+:deep(.shuttle-card) {
+  text-align: left;
+  background-color: var(--cream);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+}
+
+:deep(.shuttle-card + .shuttle-card) {
+  margin-top: 0.6rem;
+}
+
+:deep(.shuttle-card-location) {
+  font-weight: 600;
+  color: var(--dark-wood);
+  margin-bottom: 0.4rem;
+}
+
+:deep(.shuttle-card-time) {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  padding: 0.15rem 0;
+}
+
+:deep(.shuttle-card-label) {
+  color: var(--text-light);
+}
+
+:deep(.shuttle-return-note) {
+  margin-top: 1rem;
+}
+
 .contact-content {
   text-align: center;
 }
@@ -297,13 +397,17 @@ const toggleFaq = (index: number) => {
     padding: 0.75rem 1.5rem 1.25rem;
   }
 
-  :deep(.shuttle-table) {
-    font-size: 0.85rem;
+  :deep(.shuttle-table-wrap) {
+    display: none;
   }
 
-  :deep(.shuttle-table th),
-  :deep(.shuttle-table td) {
-    padding: 0.5rem 0.6rem;
+  :deep(.shuttle-cards) {
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 1200px;
   }
 }
 </style>

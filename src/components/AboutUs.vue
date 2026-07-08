@@ -15,7 +15,7 @@ import StickySection from './StickySection.vue'
     <section class="first-section">
       <div class="first-section-content">
         <div class="first-section-image">
-          <img src="/images/our-story/section-1-update.jpg" alt="How we met" loading="lazy" />
+          <img src="/images/our-story/section-1-update.webp" alt="How we met" loading="lazy" />
         </div>
         <div class="first-section-text">
           <h2>How We Met</h2>
@@ -36,7 +36,7 @@ import StickySection from './StickySection.vue'
       </div>
     </section>
 
-    <StickySection image-src="/images/our-story/section-2.jpg" image-alt="Falling in love" reverse>
+    <StickySection image-src="/images/our-story/section-2.webp" image-alt="Falling in love" reverse>
       <h2>Falling in Love</h2>
       <p>
         Joe attended a wedding for some college friends in Dallas on New Years 2022. Kait, in a bout
@@ -60,7 +60,7 @@ import StickySection from './StickySection.vue'
 
     <!-- Sticky Section 3: First Date -->
     <StickySection
-      image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0038.jpg"
+      image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0038.webp"
       image-alt="First date"
       :image-offset-x="-40"
       image-position-x="15%"
@@ -82,7 +82,7 @@ import StickySection from './StickySection.vue'
 
     <!-- Sticky Section 4: Adventures Together -->
     <StickySection
-      image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0087.jpg"
+      image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0087.webp"
       image-alt="Adventures together"
       reverse
     >
@@ -107,7 +107,7 @@ import StickySection from './StickySection.vue'
       <div class="chicago-image-container">
         <div class="chicago-images">
           <img
-            src="/images/joe-and-kait/image.png"
+            src="/images/joe-and-kait/image.webp"
             alt="Our life in Chicago"
             class="chicago-image-1"
             loading="lazy"
@@ -115,7 +115,7 @@ import StickySection from './StickySection.vue'
             height="440"
           />
           <img
-            src="/images/joe-and-kait/image copy.png"
+            src="/images/joe-and-kait/image copy.webp"
             alt="Our life in Chicago"
             class="chicago-image-2"
             loading="lazy"
@@ -150,7 +150,7 @@ import StickySection from './StickySection.vue'
 
     <!-- Sticky Section 6: The Proposal -->
     <StickySection
-      image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0096.jpg"
+      image-src="/images/joe-and-kait/Kauffman-Pezzulla-E-0096.webp"
       image-alt="The proposal"
       reverse
     >
@@ -207,7 +207,7 @@ import StickySection from './StickySection.vue'
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/images/header-faq.jpg');
+  background-image: url('/images/header-faq.webp');
   background-position: 5% center;
   background-size: cover;
   background-repeat: no-repeat;

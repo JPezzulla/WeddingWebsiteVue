@@ -42,3 +42,6 @@ src/**/*.js.map
 # Build artifacts from vite config compilation
 vite.config.js
 vite.config.js.map
+
+# Local backups of pre-optimization images (see scripts/optimize-images.mjs)
+image-originals/

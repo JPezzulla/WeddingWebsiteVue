@@ -84,7 +84,7 @@ const handleSubmit = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('/images/joe-and-kait/Kauffman-Pezzulla-E-0112.jpg') center/cover;
+  background: url('/images/joe-and-kait/Kauffman-Pezzulla-E-0112.webp') center/cover;
   opacity: 0.2;
   z-index: 0;
 }

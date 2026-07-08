@@ -10,61 +10,61 @@ interface PartyMember {
 const weddingParty: PartyMember[] = [
   {
     name: 'Derek Scott',
-    image: '/images/wedding-party/derek-joe.png',
+    image: '/images/wedding-party/derek-joe.webp',
   },
   {
     name: 'Katherine Fuller',
-    image: '/images/wedding-party/katief-kait.png',
+    image: '/images/wedding-party/katief-kait.webp',
   },
   {
     name: 'Mary Katheryn Joy',
-    image: '/images/wedding-party/katiej-joe.png',
+    image: '/images/wedding-party/katiej-joe.webp',
   },
   {
     name: 'Kaitlyn Groves',
-    image: '/images/wedding-party/katieg-kait.png',
+    image: '/images/wedding-party/katieg-kait.webp',
   },
   {
     name: 'Maggie Fritz',
-    image: '/images/wedding-party/maggie-joe.png',
+    image: '/images/wedding-party/maggie-joe.webp',
   },
   {
     name: "Jessica D'Apice",
-    image: '/images/wedding-party/jess-kait.png',
+    image: '/images/wedding-party/jess-kait.webp',
   },
   {
     name: 'Maura Pezzulla',
-    image: '/images/wedding-party/maura-joe.png',
+    image: '/images/wedding-party/maura-joe.webp',
   },
   {
     name: 'Samuel Kauffman',
-    image: '/images/wedding-party/sam-kait.png',
+    image: '/images/wedding-party/sam-kait.webp',
   },
   {
     name: 'Nathan Longstreth',
-    image: '/images/wedding-party/nate-joe.png',
+    image: '/images/wedding-party/nate-joe.webp',
   },
   {
     name: 'Shirly Kauffman',
-    image: '/images/wedding-party/shirley-kait.png',
+    image: '/images/wedding-party/shirley-kait.webp',
   },
   {
     name: 'Andrew Pezzulla',
-    image: '/images/wedding-party/drew-joe.png',
+    image: '/images/wedding-party/drew-joe.webp',
   },
   {
     name: 'Luke Pezzulla',
-    image: '/images/wedding-party/luke-joe.png',
+    image: '/images/wedding-party/luke-joe.webp',
   },
   {
     name: 'Michael Pezzulla',
-    image: '/images/wedding-party/michael-joe.png',
+    image: '/images/wedding-party/michael-joe.webp',
   },
 ]
 
 const officiant = {
   name: 'Garrett Lyons',
-  images: ['/images/wedding-party/garrett-joe.png', '/images/wedding-party/garrett-kait.png'],
+  images: ['/images/wedding-party/garrett-joe.webp', '/images/wedding-party/garrett-kait.webp'],
 }
 </script>
 
@@ -73,7 +73,7 @@ const officiant = {
     title="Wedding Party"
     gradient-from="var(--gold)"
     gradient-to="var(--sage-dark)"
-    background-image="/images/joe-and-kait/Kauffman-Pezzulla-E-0147.jpg"
+    background-image="/images/joe-and-kait/Kauffman-Pezzulla-E-0147.webp"
     background-position="right 42%"
     background-size="150%"
   >
