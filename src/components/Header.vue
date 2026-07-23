@@ -149,7 +149,7 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1200;
   background-color: rgba(245, 243, 240, 0.95);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
@@ -246,7 +246,7 @@ onUnmounted(() => {
   outline: none !important;
   cursor: pointer;
   padding: 0;
-  z-index: 1001;
+  z-index: 1101;
   -webkit-tap-highlight-color: transparent;
   box-shadow: none !important;
 }
@@ -297,9 +297,11 @@ onUnmounted(() => {
   box-shadow: -2px 0 20px rgba(0, 0, 0, 0.1);
   padding: 6rem 1.5rem 1.5rem;
   transition: right 0.3s ease;
-  z-index: 1000;
+  z-index: 1100;
   flex-direction: column;
   gap: 0.5rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-nav.open {
@@ -338,7 +340,7 @@ onUnmounted(() => {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: 1050;
   animation: fadeIn 0.3s ease;
   cursor: pointer;
   pointer-events: auto;
