@@ -2,6 +2,8 @@
 import { ref, onMounted, watch } from 'vue'
 import PageLayout from '../components/PageLayout.vue'
 import SegmentedControl from '../components/SegmentedControl.vue'
+import InfoSection from '../components/InfoSection.vue'
+import ShuttleSchedule from '../components/ShuttleSchedule.vue'
 import { HOTELS, EVENTS, VENUE } from '@/data/locations'
 import {
   createVenueMarker,
@@ -228,6 +230,27 @@ onMounted(() => {
                   <div class="venue-address">{{ event.address }}</div>
                 </div>
               </div>
+              <div v-if="event.dressCode" class="event-dress-code">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"
+                  />
+                </svg>
+                <div>
+                  <div class="dress-code-label">Dress Code</div>
+                  <div class="dress-code-value">{{ event.dressCode }}</div>
+                </div>
+              </div>
               <p class="event-description">{{ event.description }}</p>
             </div>
           </div>
@@ -240,6 +263,11 @@ onMounted(() => {
         </div>
       </div>
     </section>
+
+    <!-- Shuttle Schedule -->
+    <InfoSection v-if="!showMapMobile" title="Wedding Day Shuttle" :alternate="true">
+      <ShuttleSchedule card-background="var(--cream)" />
+    </InfoSection>
 
     <!-- Mobile Toggle - Bottom Fixed -->
     <SegmentedControl
@@ -335,7 +363,8 @@ onMounted(() => {
 }
 
 .event-time,
-.event-venue {
+.event-venue,
+.event-dress-code {
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
@@ -344,18 +373,21 @@ onMounted(() => {
 }
 
 .event-time svg,
-.event-venue svg {
+.event-venue svg,
+.event-dress-code svg {
   flex-shrink: 0;
   margin-top: 2px;
   color: var(--sage-green);
 }
 
-.venue-name {
+.venue-name,
+.dress-code-label {
   font-weight: 600;
   color: var(--text-primary);
 }
 
-.venue-address {
+.venue-address,
+.dress-code-value {
   font-size: 0.9rem;
   color: var(--text-light);
 }

@@ -44,6 +44,7 @@ export interface Event {
   name: string
   venue: string
   address: string
+  dressCode?: string
   description: string
   image: string
   lat: number
@@ -95,7 +96,7 @@ export const RESTAURANTS: Restaurant[] = [
     price: '$$',
     description: 'Fun upscale tapas place with a relaxed vibe.',
     link: 'https://www.cafebabareeba.com/',
-    lat: 41.9265,
+    lat: 41.9186,
     lng: -87.6489,
   },
   {
@@ -354,10 +355,11 @@ export const EVENTS: Event[] = [
     time: '7:00 PM CST',
     name: 'Welcome Party',
     venue: 'Cafe Ba-Ba-Reeba!',
-    address: '2404 N Halsted St, Chicago, IL 60614',
+    address: '2024 N Halsted St, Chicago, IL 60614',
+    dressCode: 'Cocktail Attire',
     description: 'Join us for tapas and drinks to kick off the weekend!',
     image: '/images/schedule/babareeba.webp',
-    lat: 41.9265,
+    lat: 41.9186,
     lng: -87.6489,
   },
   {
@@ -368,6 +370,7 @@ export const EVENTS: Event[] = [
     name: 'Wedding Ceremony & Reception',
     venue: 'Cafe Brauer',
     address: '2021 N Stockton Dr, Chicago, IL 60614',
+    dressCode: 'Black Tie Optional',
     description: 'Our ceremony and reception in beautiful Lincoln Park.',
     image: '/images/schedule/cafebrauer.webp',
     lat: 41.9204,

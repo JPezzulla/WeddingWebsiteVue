@@ -14,7 +14,7 @@ const faqs = ref<FAQ[]>([
   {
     question: 'What is the dress code?',
     answer:
-      "We've chosen to go with Black tie optional to give our friends and family the chance to dress up as fancy as they'd like. Please do not feel obligated to rent a tux or pull out a gown!",
+      "For the wedding, we've chosen to go with Black tie optional to give our friends and family the chance to dress up as fancy as they'd like. Please do not feel obligated to rent a tux or pull out a gown! For the Friday night Welcome Party, the dress code is Cocktail Attire.",
     open: false,
   },
   {

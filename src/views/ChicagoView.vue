@@ -2,6 +2,7 @@
 import { ref, onMounted, watch, computed } from 'vue'
 import PageLayout from '../components/PageLayout.vue'
 import InfoSection from '../components/InfoSection.vue'
+import ShuttleSchedule from '../components/ShuttleSchedule.vue'
 import AsSeenOnBearBadge from '../components/AsSeenOnBearBadge.vue'
 import MichelinStarBadge from '../components/MichelinStarBadge.vue'
 import SegmentedControl from '../components/SegmentedControl.vue'
@@ -218,6 +219,11 @@ onMounted(() => {
     <div class="content-wrapper" :class="{ 'with-map': showMap }">
       <!-- Main Content -->
       <div class="main-content" :class="{ scrollable: showMap }">
+        <!-- Shuttle Schedule -->
+        <InfoSection title="Wedding Day Shuttle" :alternate="true">
+          <ShuttleSchedule card-background="var(--cream)" />
+        </InfoSection>
+
         <!-- Hotels Section -->
         <InfoSection
           title="Where to Stay"
